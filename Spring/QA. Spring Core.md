@@ -1,6 +1,36 @@
 ###### Можете ли вы описать жизненный цикл бина?
 
-[[Жизненный цикл бина]]
+1. **Создание ApplicationContext**: Например, AnnotationConfigApplicationContext. Внутри него создается BeanFactory (чаще всего DefaultListableBeanFactory), который и будет хранить определения бинов (BeanDefinition). Этот BeanFactory также реализует интерфейс BeanDefinitionRegistry.
+2. **Начальная регистрация BeanDefinition**:
+    - Конфигурационные классы (например, переданные в конструктор AnnotationConfigApplicationContext или через register()) регистрируются как BeanDefinition.
+    - Spring регистрирует несколько внутренних (инфраструктурных) BeanFactoryPostProcessor'ов, **самый важный из которых - ConfigurationClassPostProcessor**. Он сам регистрируется как бин (и его BeanDefinition).
+3. **Вызов BeanDefinitionRegistryPostProcessor (BDRPP)**:
+    - Контейнер находит все бины, реализующие интерфейс BeanDefinitionRegistryPostProcessor. **ConfigurationClassPostProcessor - один из них!**
+    - Вызывается метод postProcessBeanDefinitionRegistry() у каждого BDRPP.
+    - **Именно на этом этапе ConfigurationClassPostProcessor делает основную работу:**
+        - Находит классы, аннотированные @Configuration.
+        - Обрабатывает @ComponentScan: сканирует указанные пакеты на наличие компонентов (@Component, @Service, @Repository, @Controller и т.д.) и создает для них BeanDefinition.
+        - **Все найденные и созданные BeanDefinition регистрируются в BeanDefinitionRegistry (т.е. в нашем DefaultListableBeanFactory).** Внутри DefaultListableBeanFactory для хранения этих определений используется ConcurrentHashMap<String, BeanDefinition>.
+4. **Вызов BeanFactoryPostProcessor (BFPP)**:
+    - Вызывается метод postProcessBeanFactory() у каждого BFPP. Эти процессоры могут модифицировать уже существующие BeanDefinition (например, PropertySourcesPlaceholderConfigurer подставляет значения из properties в ${...}). Они обычно не добавляют новые определения (хотя технически могут), для добавления предназначен BDRPP.
+5. Создение бинов, если нужно происходит - внедрение в конструкторы
+6. BeanPostProcessor postProcessBeforeInitialization()
+7. Внедрение **SpEL, @Value и @Autowired** выполняется в `AutowiredAnnotationBeanPostProcessor` и `CommonAnnotationBeanPostProcessor`
+8. **Если бин реализует `BeanNameAware` → вызывается `setBeanName()`** (передается ID бина).
+9. **Если бин реализует `BeanFactoryAware` → вызывается `setBeanFactory()`**.
+10. **Если бин реализует `ApplicationContextAware` → вызывается `setApplicationContext
+11. @PostConstruct (jakarta annotation)
+12. AfterPropetiesSet (InitializingBean)
+13. Custom initMethod или стандартная инициализация
+14. BeanPostProcessor postProcessAfterInitialization(). Создание проксей для @Cachable, @Async, @Transactional
+15. ApplicationListener
+16. Теперь бин готов к использованию. Его можно получить с помощью метода `ApplicationContext#getBean()`.
+17. После того как контекст будет закрыт(метод `close()` из ApplicationContext), бин уничтожается.
+18. @PreDestoy (jakarta annotation)
+19. destroy() (DisposableBean)
+20. Custom Destoroy Method
+
+![](_Res/bean-life-cycle.png)
 ###### Что такое внедрение зависимостей(DI) и в чем его преимущества?
 
 Внедрение зависимостей (DI) — это метод, который помогает уменьшить количество связей между компонентами в Spring. При использовании DI, создание объектов для зависимостей передается на фабрику или внешнему источнику. Это означает, что вам не нужно беспокоиться о создании этих объектов самостоятельно, вы просто используете их.
