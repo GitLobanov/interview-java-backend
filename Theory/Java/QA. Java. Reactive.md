@@ -160,6 +160,10 @@ Unlike concat, merge is considered an eager operation where all publishers subsc
 
 ###### В чем преимущество WebFlux?
 
+###### В чем отличие несинхронной обработки запроса и неблокирующей реактивной обработки?
+
+
+
 ## QA. 2
 
 ###### Какие задачи реализовывались на WebFlux?

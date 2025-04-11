@@ -1,9 +1,3 @@
-## Resources
-
-- [Just-in-Time Kubernetes: Руководство начинающим для понимания основных концепций Kubernetes](https://habr.com/ru/companies/otus/articles/650231/)
-- [Kubernetes для разработчиков | Илья Бочаров](https://www.youtube.com/watch?v=9ZxZ9gb9pQs)
-- [Круглый стол «Нужно ли разработчику знать Kubernetes»](https://www.youtube.com/watch?v=XAuXswdHi5U&t=4s)
-- 
 ## QA
 
 ###### Какие основные компоненты master node в Kubernetes?
@@ -91,23 +85,128 @@ Kubelet подключается к среде выполнения контей
 - kubelet
 - kube-proxy
 
-9. Что нужно знать о кубере разработчику?
+###### Что нужно знать о кубере разработчику?
 
 - **Во-первых**, как работает Kubernetes для того, чтобы запустить в нём приложение. То есть, что происходит в кластере, когда разработчик делает `kubectl apply -f deploy.yaml`. Например, почему деплой прошел, а Pod`ы находятся в статусе pending? В таком случае нет смысла смотреть controller-manager. Можно посмотреть в describe Deployment`а и увидеть, что там создался ReplicaSet. Вот знать не необходимо, но это очень хорошо позволяет понимать, что происходит с кластером Kubernetes и почему твои приложения запускаются или не запускаются или запускаются долго и так далее.
 - **Во-вторых**, хорошо бы, но не обязательно знать об инфраструктурных ограничениях, которые есть в кластере. О том, что там есть ресурсы, CPU, память, что эти ресурсы могут ограничивать админы. Что есть такие объекты как Limit Range и Resource Quota, их админы применяют, чтобы ограничивать ресурсы и разделять разделять ресурсы по пространствам имен (namespace).
-- **Дальше**: разработчику тоже хорошо бы знать, что есть в кластере процессы аутентификации и авторизации, что есть такая штука как RBAC (Role-Based Access Control). Все это используется админами, чтобы разделять права в кластере.Что вообще в кластере есть какие-то права.
+- **Дальше**: разработчику тоже хорошо бы знать, что есть в кластере процессы аутентификации и авторизации, что есть такая штука как RBAC (Role-Based Access Control). Все это используется админами, чтобы разделять права в кластере. Что вообще в кластере есть какие-то права.
 - Основные абстракции которые есть в Kubernetes: Pod, Deployment, ReplicaSet, StatefulSet, Job, CronJob. Это всё нужно просто потому, что это то, что описывает твое приложение в рамках кластера Kubernetes.
-- 
 
 
-10. Что такое Resource Quota
+###### Что такое Resource Quota
 
-11. Что такое RBAC Kubernetes
+- Resource Quota позволяет задать максимальное количество ресурсов (например, CPU, памяти), которые могут быть использованы в рамках одного пространства имён.
+- Можно ограничить количество создаваемых объектов определённого типа (например, поды, сервисы, PersistentVolumeClaims).
+- Resource Quota защищает кластер от ситуаций, когда одно приложение или команда монополизирует все доступные ресурсы.
 
-12. Что такое Pod Disruption Budget.
+Пример использование:
 
+Вы хотите ограничить использование ресурсов для команды разработки в пространстве имён `dev-team`. Команда может использовать максимум 4 CPU, 8 ГБ памяти и создать до 10 подов.
 
-###### Какие виды сервисов есть?
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: dev-quota
+  namespace: dev-team
+spec:
+  hard:
+    requests.cpu: "4"
+    requests.memory: "8Gi"
+    limits.cpu: "8"
+    limits.memory: "16Gi"
+    pods: "10"
+```
 
+###### Что такое RBAC Kubernetes
+
+RBAC работает по принципу "проверки разрешений". Когда пользователь или сервис пытается выполнить действие (например, создать под), Kubernetes проверяет:
+
+1. Имеет ли субъект (пользователь или сервисный аккаунт) соответствующие права через RoleBinding или ClusterRoleBinding.
+2. Разрешает ли роль (Role или ClusterRole) выполнение этого действия.
+
+Примеры конфигурации RBAC
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: dev-team
+  name: pod-reader
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+```
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods
+  namespace: dev-team
+subjects:
+- kind: User
+  name: alice
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: pod-reader
+  apiGroup: rbac.authorization.k8s.io
+```
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-admin-role
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+```
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-binding
+subjects:
+- kind: User
+  name: bob
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin-role
+  apiGroup: rbac.authorization.k8s.io
+```
+###### Что такое Pod Disruption Budget.
+
+Если PDB требует, чтобы хотя бы 3 пода из 5 были доступны, то Kubernetes не позволит удалить более 2 подов одновременно.
+
+Сценарий 1: Гарантия минимум 3 работающих подов
+
+```java
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: pdb-min-available
+spec:
+  minAvailable: 3
+  selector:
+    matchLabels:
+      app: web
+```
+
+Этот PDB гарантирует, что минимум 3 пода с меткой `app: web` будут доступны.
 ###### Что поднимает контейнеры в подах?
 
+Контейнеры в подах Kubernetes запускаются и управляются с помощью **Kubelet** — одного из ключевых компонентов Kubernetes
+
+Kubernetes не работает напрямую с контейнерами, такими как Docker, containerd или CRI-O. Вместо этого он использует стандартный интерфейс **CRI (Container Runtime Interface)** , который позволяет взаимодействовать с различными runtime через единый протокол.
+
+## Resources
+
+- [Just-in-Time Kubernetes: Руководство начинающим для понимания основных концепций Kubernetes](https://habr.com/ru/companies/otus/articles/650231/)
+- [Kubernetes для разработчиков | Илья Бочаров](https://www.youtube.com/watch?v=9ZxZ9gb9pQs)
+- [Круглый стол «Нужно ли разработчику знать Kubernetes»](https://www.youtube.com/watch?v=XAuXswdHi5U&t=4s)

@@ -262,3 +262,20 @@ public class OrderRequest {
 ###### отличия btree bндекса от бинарного и для чего они нужны
 
 ###### Что такое type в EntityGraph?
+
+###### Сколько потоков Hiraki?
+
+`spring.datasource.hikari.maximum-pool-size=10` 
+`spring.datasource.hikari.minimum-idle=10` 
+###### Настройки hikari
+
+```java
+spring.datasource.hikari.connection-timeout=50000 
+spring.datasource.hikari.idle-timeout=300000 
+spring.datasource.hikari.max-lifetime=900000 
+spring.datasource.hikari.maximum-pool-size=10 
+spring.datasource.hikari.minimum-idle=10 
+spring.datasource.hikari.pool-name=ConnPool 
+
+spring.datasource.hikari.connection-test-query=select 1 from dual spring.datasource.hikari.data-source-properties.cachePrepStmts=true spring.datasource.hikari.data-source-properties.prepStmtCacheSize=250 spring.datasource.hikari.data-source-properties.prepStmtCacheSqlLimit=2048 spring.datasource.hikari.data-source-properties.useServerPrepStmts=true spring.datasource.hikari.data-source-properties.useLocalSessionState=true spring.datasource.hikari.data-source-properties.rewriteBatchedStatements=true spring.datasource.hikari.data-source-properties.cacheResultSetMetadata=true spring.datasource.hikari.data-source-properties.cacheServerConfiguration=true spring.datasource.hikari.data-source-properties.elideSetAutoCommits=true spring.datasource.hikari.data-source-properties.maintainTimeStats=false
+```
