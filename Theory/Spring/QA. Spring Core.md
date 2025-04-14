@@ -1,3 +1,11 @@
+###### Зачем нам Spring?
+
+- DI (Dependency Injection) - управление зависимостями
+- Обеспечение слабой связанности
+- Есть много компонентов, которые ускоряют работу
+###### Как в spring реализуется dependency inversion?
+
+- Через DI
 ###### Что такое внедрение зависимостей(DI) и в чем его преимущества?
 
 Внедрение зависимостей (DI) — это метод, который помогает уменьшить количество связей между компонентами в Spring. При использовании DI, создание объектов для зависимостей передается на фабрику или внешнему источнику. Это означает, что вам не нужно беспокоиться о создании этих объектов самостоятельно, вы просто используете их.
@@ -19,7 +27,13 @@ DI - **реализация** Inversion of Control (IoC).
 - Код _явно запрашивает_ зависимости у контейнера.
 - Классы зависят от Service Locator
 - this.gateway = ServiceLocator.get("paymentGateway");
+###### Spring Boot vs Spring
 
+- В Spring boot есть встроенный TomCat
+- Несет авто конфигурацию. Автоматически конфигурирует некоторые компоненты 
+- В @SpringBootApplication уже встроены другие аннотации - @SpringBootConfiguration, @EnableAutoConfiguration, @CompnentScan
+- Достаточно настраивать при помощи application.propeties
+- Имеет starter зависимости
 ###### В чем разница IoC и ApplicationContext? Что такое BeanFactory?
 
 - IoC - Принцип проектирования, при котором управление зависимостями и созданием объектов передается контейнеру, а не объектам.
@@ -115,12 +129,6 @@ DI - **реализация** Inversion of Control (IoC).
 - Можно вызвать метод `close()` из класса AbstractApplicationContext.
 
 Spring Boot самостоятельно зарегистрирует shutdown-hook за вас.
-
-###### Зачем нам нужен Spring Framework
-
-- DI (Dependency Injection) - управление зависимостями
-- Обеспечение слабой связанности
-- Есть много компонентов, которые ускоряют работу
 
 ###### Основные компоненты Spring
 
@@ -308,6 +316,7 @@ public class PaymentConfig {
 3. readOnly
 4. rollbackFor
 5. notRollbackFor
+6. timeout
 
 [[@Transactional]]
 [[@Transactional. Основы работы с транзакциями]]

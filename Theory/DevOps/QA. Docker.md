@@ -1,6 +1,6 @@
 ## QA
 
-#### Что такое docker registry
+###### Что такое docker registry
 
 Пример публичного [docker registry](https://www.baeldung.com/ops/docker-private-registry), Docker hub. Мы можем создавать свой приватный, задать аутентификацию или создать приватный аккаунт в докер хабе. A Docker registry is a system for storing and distributing Docker images with specific names. There may be several versions of the same image, each with its own set of tags.
 
@@ -62,8 +62,6 @@ CMD ["python3", "/app/app.py"]
     - Выполняется команда по умолчанию: `python3 /app/app.py`.
 ```
 
-###### Для чего нужна многоэтапная сборка в докере?
-
 ###### Какие существуют типы сетей в Docker?
 
 В Docker есть несколько типов сетей:
@@ -73,6 +71,9 @@ CMD ["python3", "/app/app.py"]
 3. none: В контейнере отключены все сетевые интерфейсы. Контейнер полностью изолирован от сети.
 4. overlay:  Эта сеть позволяет контейнерам на разных Docker-хостах общаться друг с другом, например, в кластере Docker Swarm. Она строится поверх существующих сетей.
 5. macvlan:  Контейнеру назначается собственный MAC-адрес и IP, позволяя ему действовать как полноценное сетевое устройство в сети хоста.
+
+###### Bit mount vs volumes
+
 
 ## Resources
 
