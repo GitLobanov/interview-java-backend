@@ -1,0 +1,11 @@
+## CREATE
+
+```SQL
+CREATE SCHEMA `new_schema` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+## SELECT
+
+```sql
+SELECT * FROM INFORMATION_SCHEMA.SCHEMATA;
+```

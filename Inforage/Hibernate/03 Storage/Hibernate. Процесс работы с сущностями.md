@@ -1,0 +1,6 @@
+- Сохранение (save): при использовании метода `session.save(entity)` сущность становится persistent, и Hibernate сохраняет её в базе данных.
+- Обновление (update): метод `session.update(entity)` используется для обновления detached сущностей. Hibernate проверяет состояние сущности и синхронизирует её с базой данных.
+- Удаление (delete): метод `session.delete(entity)` помечает сущность для удаления. После коммита она будет удалена из базы данных.
+- Слияние (merge): метод `session.merge(entity)` объединяет состояние detached сущности с persistent. Hibernate возвращает новую сущность, которая теперь в состоянии persistent.
+- Очистка (clear): метод `session.clear()` очищает все persistent сущности из текущей сессии, тем самым возвращая их в transient или detached состояние.
+- Коммит (commit): при выполнении `transaction.commit()` все изменения в persistent сущностях сохраняются в базе данных.

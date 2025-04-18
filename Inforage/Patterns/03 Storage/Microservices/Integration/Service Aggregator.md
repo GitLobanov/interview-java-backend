@@ -1,0 +1,3 @@
+The aggregator pattern, within the context of microservice architecture, serves to amalgamate the responses obtained from various autonomous microservices. By adopting this pattern, the burden of communication between the client and services is diminished. Moreover, it enables the consolidation of distinct functionalities in a manner that is readily understandable from an architectural perspective.
+
+This particular pattern finds extensive application in e-commerce applications, particularly for the purpose of retrieving data from the backend systems.
