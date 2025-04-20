@@ -3,9 +3,9 @@ name: Deploy Markdown Docs to GitHub Pages
 on:
   push:
     branches: [ "master" ]
-    paths:
-      - 'posts/**'
-      - 'README.md'
+    # paths:
+    #   - 'posts/**'
+    #   - 'README.md'
 
 jobs:
   build-and-deploy:
