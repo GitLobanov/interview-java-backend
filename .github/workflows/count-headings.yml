@@ -10,7 +10,3 @@ jobs:
         run: |
           COUNT=$(grep -c '^#### ' QA/Livecoding/Java/LC_Stream_API.md || echo "0")
           echo "LC_STREAM_API_COUNT=$COUNT" >> $GITHUB_ENV
-      - name: Create README Badge
-        run: |
-          mkdir -p badges
-          echo "![](https://img.shields.io/badge/stream_api_задачек-${LC_STREAM_API_COUNT}-blue)" > badges/stream-api-badge.md

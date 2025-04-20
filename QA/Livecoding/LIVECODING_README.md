@@ -8,8 +8,8 @@
 - [Core](Java/LC_Java_Core.md)
 - [Regex](Java/LC_Java_Regex.md)
 - [Write something](Java/LC_Java_Write_Something.md)
-- [Stream API](Java/LC_Stream_API.md) ![](https://github.com/GitLobanov/interview-java-backend/raw/master/badges/streamapi-count.json)
-
+- [Stream API](QA/Livecoding/Java/LC_Stream_API.md) ![](https://img.shields.io/badge/Stream_API_задачек-${LC_STREAM_API_COUNT}-blue)
+- 
 ## Rest
 
 - [URL](REST/LC_REST_URL.md)
