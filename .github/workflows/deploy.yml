@@ -33,8 +33,8 @@ jobs:
         run: |
           mkdir -p _site
           sed -E '
-            s|\(_inforage/([^)]+\.md)\)|({% link _inforage/\1 %})|g;
-            s|\(_qa/([^)]+\.md)\)|({% link _qa/\1 %})|g' index.md > _site/index.md
+            s|\(posts/_inforage/([^)]+\.md)\)|({% link _inforage/\1 %})|g;
+            s|\(posts/_qa/([^)]+\.md)\)|({% link _qa/\1 %})|g' index.md > _site/index.md
 
 
       - name: Build with Jekyll
