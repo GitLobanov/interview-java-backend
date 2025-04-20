@@ -8,7 +8,7 @@
 - [Core](Java/LC_Java_Core.md)
 - [Regex](Java/LC_Java_Regex.md)
 - [Write something](Java/LC_Java_Write_Something.md)
-- [Stream API](Java/LC_Stream_API.md)
+- [Stream API](Java/LC_Stream_API.md) ![](https://github.com/GitLobanov/interview-java-backend/raw/master/badges/streamapi-count.json)
 
 ## Rest
 

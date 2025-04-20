@@ -1,0 +1,20 @@
+name: Count LC tasks (H4 headings)
+on: [push]
+
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Count LC Stream API
+        run: |
+          COUNT=$(grep -c '^#### ' QA/Livecoding/Java/LC_Stream_API.md)
+          echo "H4_COUNT=$COUNT" >> $GITHUB_ENV
+      - name: Update Badge
+        uses: schneegans/dynamic-badges-action@v1
+        with:
+          auth: ${{ secrets.GITHUB_TOKEN }}
+          filename: badges/streamapi-count.json
+          label: "Stream API count tasks"
+          message: "${{ env.H4_COUNT }}"
+          color: "blue"

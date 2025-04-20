@@ -75,8 +75,17 @@ public class CollectionTest {
     10 ->4
     15 ->3
  */
+
+public static void main(String[] args) {  
+    System.out.println(makeSummary(new int[]{10, 15, 23, 10, 15, 10, 66, 10, 66, 15}));  
+}  
+  
+private static Map<Integer, Long> makeSummary (int[] mas ) {  
+    return null;
+}
 ```
 
+Решение: HowMuchNumberMeetsInArray
 #### Задача 4. 
 
 ```java
@@ -97,6 +106,14 @@ class StudentMark {
     public int getMark() {
         return mark;
     }
+
+	@Override  
+	public String toString() {  
+	    return "StudentMark{" +  
+	            "id=" + id +  
+	            ", mark=" + mark +  
+	            '}';  
+	}
 }
 
 public class TopStudentsByAverage {
@@ -121,10 +138,9 @@ public class TopStudentsByAverage {
 
     }
 }
-
-
 ```
 
+Решение: TopStudentMark
 #### Задача 5.
 
 ```java
@@ -405,12 +421,24 @@ class AnimalBigStream {
 
 #### Задача 6
 
- Определить все ли числа в стриме положительные
 
 ```java
-List<Integer> numbers = Arrays.asList(1,2,3,4,5);
+/*
+ Определить все ли числа в списке положительные
+*/
+public static void main(String[] args) {  
+    List<Integer> numbers = Arrays.asList(1,2,3,4,5);  
+    List<Integer> numbers1 = Arrays.asList(1,2,-3,4,5);  
+    System.out.println(allPositive(numbers));  
+    System.out.println(allPositive(numbers1));  
+}  
+  
+private static boolean allPositive (List<Integer> list) {  
+    return false;
+}
 ```
 
+Решение: AreAllNumbersPositive
 #### Задача 7
 
 Получить список городов, начинающихся с "A", в UpperCase и отсортированном порядке
@@ -445,10 +473,10 @@ numbers.stream()
 
 ```java
  // Сгруппировать строки по длине
-    List<String> strings = List.of("cat", "dog", "apple", "bat");
+List<String> strings = List.of("cat", "dog", "apple", "bat");
 
-    Map<Integer, List<String>>= strings.stream()
-            .collect(Collectors.groupingBy(word -> word.length()));
+Map<Integer, List<String>>= strings.stream()
+        .collect(Collectors.groupingBy(word -> word.length()));
 ```
 #### Задача 10
 
@@ -514,17 +542,19 @@ public static List<String> findDepartmentsWithMostUniqueProjects (List<Employee>
 record Transaction(String clientId, String category, LocalDateTime timestamp) {}
 public static List<String> findClientsWithAllCategories(
 	List<Transaction> transactions, 
-	Set<String> required Categories, 
+	Set<String> requiredCategories, 
 	LocalDateTime start, 
 	LocalDateTime end) {
 	return new ArrayList<>();
 }	
 ```
 
+Решение: TransactionSearch
 #### Задача 13
 
 ```java
-// Вычислить факториал для каждого числа в списке 
+// Вычислить факториал для каждого числа в списке
+// n! = 1 * 2 * 3 ... n
 public Map<Integer, Long> calculatefactorial(List<Integer> numbers) { 
 	return null;
 }	

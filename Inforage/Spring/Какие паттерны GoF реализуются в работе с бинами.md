@@ -1,4 +1,4 @@
-В работе с бинами в Spring Framework реализуются многие паттерны, предложенные в книге _Design Patterns: Elements of Reusable Object-Oriented Software_ (Gang of Four, [[GoF]]). 
+В работе с бинами в Spring Framework реализуются многие паттерны, предложенные в книге _Design Patterns: Elements of Reusable Object-Oriented Software_ (Gang of Four, [[../Patterns/GoF]]). 
 ### 1. Singleton (Одиночка)
 
 **Описание**: Паттерн Singleton гарантирует, что у класса будет только один экземпляр, и предоставляет глобальную точку доступа к этому экземпляру.
