@@ -8,18 +8,21 @@ plugins:
   - jekyll-sitemap
 
 collections:
-  posts:
+  inforage:
     output: true
-    permalink: /:path/
+    permalink: /inforage/:path/
+  qa:
+    output: true
+    permalink: /qa/:path/
 
 defaults:
   - scope:
-      path: ""
+      path: "_inforage"
       type: "inforage"
     values:
       layout: "default"
   - scope:
-      path: ""
-      type: "qa" 
+      path: "_qa"
+      type: "qa"
     values:
       layout: "default"
