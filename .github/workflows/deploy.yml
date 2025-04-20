@@ -26,13 +26,19 @@ jobs:
           ruby-version: '3.1'
           bundler-cache: true
 
-      - name: Generate index
+      - name: Create symlinks
         run: |
-          echo "# Все материалы" > posts/INDEX.md
-          find posts/ -name "*.md" | sort -r | while read file; do
-            title=$(grep -m 1 '^# ' "$file" | sed 's/# //') || title=$(basename "$file" .md)
-            echo "- [$title]($file)" >> posts/INDEX.md
-          done
+          ln -s Inforage _inforage
+          ln -s QA _qa
+          
+      - name: Prepare Jekyll version
+        run: |
+          cp index.md _index.md
+          sed -i -E '
+            s|\((Inforage/)([^)]+\.md)\)|({% link _inforage/\2 %})|g;
+            s|\((QA/)([^)]+\.md)\)|({% link _qa/\2 %})|g' _index.md
+          mv _index.md _site/index.md
+
 
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
