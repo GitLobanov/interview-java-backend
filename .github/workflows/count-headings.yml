@@ -8,10 +8,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Count LC Stream API
         run: |
-          COUNT=$(grep -c '^#### ' QA/Livecoding/Java/LC_Stream_API.md)
+          COUNT=$(grep -c '^#### ' QA/Livecoding/Java/LC_Stream_API.md  || true)
           echo "H4_COUNT=$COUNT" >> $GITHUB_ENV
       - name: Update Badge
-        uses: schneegans/dynamic-badges-action@v1
+        uses: schneegans/dynamic-badges-action@v2
         with:
           auth: ${{ secrets.GITHUB_TOKEN }}
           filename: badges/streamapi-count.json
