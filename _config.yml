@@ -15,5 +15,11 @@ collections:
 defaults:
   - scope:
       path: ""
+      type: "inforage"
     values:
-      layout: default
+      layout: "default"
+  - scope:
+      path: ""
+      type: "qa" 
+    values:
+      layout: "default"
