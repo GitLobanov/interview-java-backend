@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -26,18 +24,17 @@ jobs:
           ruby-version: '3.1'
           bundler-cache: true
 
-      - name: Create symlinks
-        run: |
-          ln -s Inforage _inforage
-          ln -s QA _qa
+      # - name: Create symlinks
+      #   run: |
+      #     ln -s Inforage _inforage
+      #     ln -s QA _qa
           
-      - name: Prepare Jekyll version
+      - name: Prepare index.md
         run: |
-          cp index.md _index.md
-          sed -i -E '
-            s|\((Inforage/)([^)]+\.md)\)|({% link _inforage/\2 %})|g;
-            s|\((QA/)([^)]+\.md)\)|({% link _qa/\2 %})|g' _index.md
-          mv _index.md _site/index.md
+          mkdir -p _site
+          sed -E '
+            s|\(_inforage/([^)]+\.md)\)|({% link _inforage/\1 %})|g;
+            s|\(_qa/([^)]+\.md)\)|({% link _qa/\1 %})|g' index.md > _site/index.md
 
 
       - name: Build with Jekyll
