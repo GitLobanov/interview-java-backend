@@ -53,6 +53,11 @@ private static List<Node> getList() {
 5. Вернуть один элемент в списке
 6. Какая сложность будет подходить если нужно вернуть все возможные вхождения (несколько элементов)
  */
+ 
+public static class A {  
+    public Integer i;  
+    public String str;  
+}
 
 public List<A> findA(List<A> list){
     //
@@ -575,4 +580,56 @@ private static int findClosestToTen(int[] array) {
 
 Решение: FindClosestToTen
 #### Задача 25
+
+```java
+/*
+Найти второй максимально число
+Например: 
+[3,9,4,0,8,1] -> 8
+[1000,7,12,0,5,3] -> 12
+*/
+public class FindSecondMax {
+	public static void main(String[] args) {
+		System.out.println(findSecondMax(new int []{3,9,4,0,8,1}));
+		System.out.println(findSecondMax(new int []{1000,7,12,0,5,3}));
+	}
+	
+	public static int findSecondMax(int] [array) {
+		return 0;
+	}
+}
+```
+
+Решение: LC_FindSecondMaxInArray
+
+#### Задача 26
+
+```java
+// строка, считаем символы, выводим кол-во вхождений каждого
+public String getSummary (String string) {
+	return "a - 0";
+}
+```
+
+#### Задача 27
+
+```java
+// проверить все ли символы являются буквами
+public boolean isAllLetters (String string) {
+	return false;
+}
+```
+
+#### Задача 28
+
+```java
+// объеденить слова в одну строку с делиметром
+public static String concatAll (String delimiter, String... strings) {
+	return "";
+}
+
+public static void main(String[] args) {
+	System.out.println(concatAll("-", "Goodbye", "Java", "!"));
+}
+```
 

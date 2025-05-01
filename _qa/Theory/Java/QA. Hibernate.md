@@ -77,6 +77,9 @@
 
 #### Какие есть стратегии наследования?
 
+- Single Table
+- Table per Classs
+- Joined
 - [Hibernate наследование](../../../_inforage/Hibernate/03%20Storage/Hibernate%20наследование.md)
 
 #### Расскажите что такое FetchType?
@@ -279,3 +282,39 @@ spring.datasource.hikari.pool-name=ConnPool
 
 spring.datasource.hikari.connection-test-query=select 1 from dual spring.datasource.hikari.data-source-properties.cachePrepStmts=true spring.datasource.hikari.data-source-properties.prepStmtCacheSize=250 spring.datasource.hikari.data-source-properties.prepStmtCacheSqlLimit=2048 spring.datasource.hikari.data-source-properties.useServerPrepStmts=true spring.datasource.hikari.data-source-properties.useLocalSessionState=true spring.datasource.hikari.data-source-properties.rewriteBatchedStatements=true spring.datasource.hikari.data-source-properties.cacheResultSetMetadata=true spring.datasource.hikari.data-source-properties.cacheServerConfiguration=true spring.datasource.hikari.data-source-properties.elideSetAutoCommits=true spring.datasource.hikari.data-source-properties.maintainTimeStats=false
 ```
+
+
+#### Embeddable vs embedded
+
+- По умолчанию Hibernate добавляет префикс `имяПоля_` (т.е. `address_`).
+- Можно изменить это поведение через `@AttributeOverride`
+
+```java
+@Entity
+public class User {
+    @Id
+    private Long id;
+    
+    @Embedded  // Указывает, что это встроенный объект
+    private Address address;  // Address — @Embeddable
+}
+
+@Embeddable  // Объявляет класс встраиваемым
+@AttributeOverrides({
+    @AttributeOverride(name = "city", column = @Column(name = "home_city")),
+    @AttributeOverride(name = "street", column = @Column(name = "home_street"))
+})
+public class Address {
+    private String city;
+    private String street;
+}
+
+in sql
+
+CREATE TABLE User (
+    id BIGINT PRIMARY KEY,
+    home_city VARCHAR(255),  // Переименовано
+    home_street VARCHAR(255) // Переименовано
+);
+```
+

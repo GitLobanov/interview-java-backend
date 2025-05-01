@@ -125,12 +125,70 @@ Stream.of(1,2,3,4)
 #### Задача 7
 
 ```java
-    public static void task2() {
-        Stream<Integer> stream = Stream.of(1, 2, 3, 4, 5)
-                .filter(i -> i % 2 != 0);
+// Что будет в результате?
 
-        System.out.println(stream.reduce(5, Integer::sum));
-
-        // 14
-    }
+public static void task2() {
+	Stream<Integer> stream = Stream.of(1, 2, 3, 4, 5)
+        .filter(i -> i % 2 != 0);
+    System.out.println(stream.reduce(5, Integer::sum));       
+}
 ```
+
+#### Задача 8
+
+```java
+private static void task1 () {
+	Stream<Integer> stream1 = Stream.of(1, 2, 3, 4, 5).map(i -> ++i);
+	Stream<Integer> stream2 = stream.peek(System.out::println);
+	List<Integer> result = stream1.toList();
+}
+```
+
+#### Задача 9
+
+```java
+private static void task2() {  
+    IntStream.rangeClosed(1, 4)  
+            .peek(System.out::println)  
+            .skip(2)  
+            .forEach(System.out::println);  
+}
+```
+
+#### Задача 10
+
+```java
+private static void task3() {  
+    List<Integer> list = new ArrayList<>(java.util.List.of(1, 2, 3));  
+    List<Integer> result = list.stream()  
+            .peek(list::add)  
+            .toList();  
+    System.out.println(result);  
+}
+```
+
+#### Задача 11
+
+```java
+private static void task() {  
+    Stream.iterate(0, n -> n + 1)  
+            .filter(n -> n % 2 == 0)  
+            .map(n -> n * 10)  
+            .sorted()  
+            .limit(3)  
+            .forEach(System.out::println);  
+}
+```
+
+#### Задача 12
+
+```java
+// В каком порядке выведеться результат?
+private static void task4() {
+	List.of (1,2,3,4,5).stream().parallel().forEach (System.out::println);
+	List.of(1,2,3,4,5).stream().parallel().forEachOrdered (System.out::println);
+	Set.of (1,2,3,4,5).stream().parallel().forEach(System.out::println);
+	Set.of (1,2,3,4,5).stream().parallel().forEachOrdered (System.out::println);
+}
+```
+

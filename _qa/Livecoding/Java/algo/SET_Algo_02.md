@@ -75,3 +75,20 @@ public TreeNode invertTree(TeeNode root) {
 
 ```
 
+#### Задача 2. Отформатировать путь
+
+```java
+// Перемещение по каталогам в терминале (команда сd)
+// Необходимо "нормализировать" введенный путь, избавившись от . и .., приведя путь к конечному (команда pwd)
+// input: "/usr/local/bin"
+// output: "/usr/local/bin"
+// input: "/usr/local/././lib"
+// output: "/usr/local/lib"
+// input: "/usr/local/../bin"
+// output: "/usr/bin"
+// input: "/usr/../var/local/././lib/../../log"
+// output: "/var/log"
+public static String normalize(String path) {
+// решение
+}
+```

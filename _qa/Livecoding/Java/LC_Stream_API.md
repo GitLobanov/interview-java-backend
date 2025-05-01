@@ -1,4 +1,4 @@
-#### Задача 1. 
+#### Задача 1
 
 ```java
 @Data
@@ -615,6 +615,7 @@ public static Collection<String> findEditedData(List<Data> data, List<Data> data
 }
 ```
 
+Решение: ValidateEditedData
 #### Задача 16
 
 ```java
@@ -673,5 +674,24 @@ public static void main (String[] args) {
 public static void main(Strig[] args) {
 	List<String> myList = Arrays.asList("Moscow", "Madrid", "Saint-Petersburg", "Barcelona", "Milan", "Minsk");
 	
+}
+```
+
+#### Задача 20
+
+```java
+public static void main(String[] args) {  
+    streamUseCaseOddsEvens();  
+}  
+  
+private static void streamUseCaseOddsEvens () {  
+    Random randomizer = new Random();  
+    Stream<Integer> stream = randomizer.ints()  
+            .boxed()  
+            .limit(50);  
+    // 3AДAHME:  
+    // Нужно разделить числа в стриме на чётные и нечётные,    
+    // но таким образом, чтобы иметь возможность после этого    
+    // работать с обоими множествами  
 }
 ```

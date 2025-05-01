@@ -1,4 +1,4 @@
-#### RC 1
+#### Задача 1
 
 ```java  
 /*
@@ -42,7 +42,7 @@ public class Solution {
   
 Проверка: IncrementDifference  
   
-#### RC 2
+#### Задача 2
   
 ```java  
 
@@ -86,7 +86,7 @@ public class Main {
 }      
 ```  
 
-#### RC 3
+#### Задача 3
   
 ```java
 /*
@@ -104,7 +104,7 @@ class Apple extends Fruit {}
 class Orange extends Fruit {}  
 ```  
 
-#### RC 4
+#### Задача 4
   
 ```java  
 abstract class Camel {  
@@ -126,7 +126,7 @@ class Eagle {
 }  
 ```  
   
-#### RC 5
+#### Задача 5
   
 ```java  
 interface One {  
@@ -154,7 +154,7 @@ public class TwoImpl implements Two {
 }  
 ```  
 
-#### RC 6
+#### Задача 6
 
 ```java  
   
@@ -164,7 +164,7 @@ public class TwoImpl implements Two {
  */  
 ```  
 
-#### RC 7
+#### Задача 7
 
 ```java  
 /*
@@ -182,7 +182,7 @@ public static void main(String[] args) {
   
 ```  
 
-#### RC 8
+#### Задача 8
 
 ```java  
   
@@ -200,7 +200,7 @@ public class Test {
 }  
 ```  
 
-#### RC 9
+#### Задача 9
   
 ```java  
   
@@ -222,9 +222,9 @@ private void say(int digit){
 //digit = 3 
 ```  
   
-#### RC 10
+#### Задача 10
   
----  
+
 ```java  
 /*  
 Класс имплементит 2 интерфейса, каждый из которых объявляет одинаковый метод.   
@@ -277,7 +277,7 @@ var unmodifiableList = Collections.unmodifiableList(list);
         System.out.println(unmodifiableList);
 ```
 
----
+#### Задача 13
 
 ```java  
 Function<Collection<String>, Map<String, EmployeeInfo>> dataProvider = keys -> {  
@@ -294,4 +294,35 @@ Function<Collection<String>, Map<String, EmployeeInfo>> dataProvider = keys -> {
     return Employees.builder().employees(employeeInfos).build();  
 ```  
 
+#### Задача 14
+
+```java
+static class Parent {  
+  
+    public int age = 50;  
+  
+    public void method() {  
+        System.out.println("parent method work");  
+    }  
+    public void printAge() {  
+        System.out.println(age);  
+    }
+}
+  
+static class Child extends Parent {  
+    public int age = 20;  
+  
+    @Override  
+    public void method() {  
+        System.out.println("child method work");  
+    }
+}
+public static void main(String[] args) {  
+    Parent object = new Child();  
+    object.method();  
+    object.printAge();  
+}
+```
+
+#### Задача 15
 

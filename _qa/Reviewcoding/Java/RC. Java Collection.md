@@ -1,4 +1,4 @@
-#### RC 1
+#### Задача 1
 
 ```java
 /*
@@ -30,5 +30,21 @@ public static void main(String[] args) {
 }
 ```
 
-#### RC 2
+#### Задача 2
 
+
+```java
+@Service
+public class DequeTask {  
+  
+    private static Deque<String> deque = new ArrayDeque<>();  
+    public void method () {  
+        // какая-то логика работы с deque, например, описанная ниже:  
+        deque.add("string");  
+        deque.add("string2");  
+        System.out.println(String.join(", ", deque));  
+        deque.removeLast();  
+        deque.removeLast();  
+    }
+}    
+```
