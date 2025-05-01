@@ -39,9 +39,9 @@ private static List<Node> getList() {
   
     return nodes;  
 }
-*/
 ```
 
+> Решение: [FillChildrenInTreeNodeForTreeList](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/FillChildrenInTreeNodeForTreeList.java)
 #### Задача 2
 
 ```java
@@ -67,11 +67,19 @@ public List<A> findA(List<A> list){
 // hint - binary search
 ```
 
+> Решение: [FindAInListByBestAlgo](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/FindAInListByBestAlgo.java)
 #### Задача 3
 
 Дан список строк {"a", "bb", "ccc", "dddd"}. Создайте новый список, содержащий только строки
 длиной более 2 символов.
 
+```java
+private static void solution(List<String> list) {
+	// TODO
+}
+```
+
+> Решение: [CreateListWithMoreThanTwoSymboles](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/CreateListWithMoreThanTwoSymboles.java)
 #### Задача 4
 
 ```java
