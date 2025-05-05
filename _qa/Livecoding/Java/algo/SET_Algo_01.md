@@ -85,6 +85,8 @@ private static void solution(List<String> list) {
 ```java
 /* 
 Преобразовать отсортированный массив неуникальных чисел вида [1,1,2,2,3,3,6,7] в массив отсортированных по возрастанию уникальных чисел - [1,2,3,6,7,_,_,_]
+
+* без использования коллекций и стримов
  */
 // example: [1,1,2,2,3,3,6,7] -> [1,2,3,6,7,_,_,_]
 
@@ -95,33 +97,7 @@ class Solution {
 }
 ```
 
-Решение:
-
-```java
-class Solution {
-    public void removeDuplicates(int[] nums) {
-        if(nums == null || nums.length == 0){
-            return;
-        }
-
-        int count = 1;
-        int previous = 0;
-
-        for(int i = 1; i < nums.length; i++){
-            if(nums[i] != nums[previous]){
-                nums[count++] = nums[i];
-                previous = i;
-            }
-        }
-
-        for(int j = count; j < nums.length; j++){
-            nums[j] = 0;
-        }
-
-    }
-}
-```
-
+Решение: [RemoveDuplicatesInSortedArray](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/RemoveDuplicatesInSortedArray.java)
 #### Задача 5
 
 
@@ -158,11 +134,9 @@ class Solution {
 
 ```java
 /**
- * Дан массив целых чисел nums и целое число target,
+ * Дан отсортированнй массив целых чисел nums и целое число target,
  * нужно вернуть индексы двух чисел из массива таким образом,
  * чтобы они в сумме давали target.
- * Имеем в ввиду, что каждый набора входных данных будет только одно решение,
- * и нельзя использовать один и тот же элемент дважды.
  * Вы можете вернуть ответ в любом порядке.
  */
 
@@ -186,13 +160,10 @@ class Solution {
 
     }
 }
-
-//доп. Дать оценку сложности алгоритма
-//доп. Придумать алгоритм который найдет 3 числа которые дадут targetSum
 ```
 
+Решение: [FindSumOfTwoInSortedArray](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/array/FindSumOfTwoInSortedArray.java)
 #### Задача 7
-
 
 ```java
 /*
@@ -641,3 +612,30 @@ public static void main(String[] args) {
 }
 ```
 
+#### Задача 29
+
+```java
+**
+ * Дан неотсортированный массив целых чисел, вернуть индексы двух
+ * чисел, сумма которых равна заданному числу.
+ * Вы не можете использовать один и тот же элемент дважды.
+ * Пример:
+ * Given nums - [2, 7, 11, 15], target - 9.
+ * The output should be [0, 1].
+ * Because nums[0]+nums[1] 2+7=9.
+ */
+public class FindSumOfTwoInNotSortedArray {
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(findTwoOfSum(new int[]{2, 1, 4, 2, 6}, 6)));
+    }
+
+    private static int[] findTwoOfSum(int[] nums, int target) {
+        return new int[]{};
+    }
+}
+```
+
+Решение: [FindSumOfTwoInNotSortedArray](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/array/FindSumOfTwoInNotSortedArray.java)
+
+#### Задача 30
