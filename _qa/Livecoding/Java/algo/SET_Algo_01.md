@@ -41,7 +41,7 @@ private static List<Node> getList() {
 }
 ```
 
-> Решение: [FillChildrenInTreeNodeForTreeList](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/FillChildrenInTreeNodeForTreeList.java)
+> Решение: [LC_FillChildrenInTreeNodeForTreeList](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/LC_FillChildrenInTreeNodeForTreeList.java)
 #### Задача 2
 
 ```java
@@ -67,7 +67,7 @@ public List<A> findA(List<A> list){
 // hint - binary search
 ```
 
-> Решение: [FindAInListByBestAlgo](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/FindAInListByBestAlgo.java)
+> Решение: [LC_FindAInListByBestAlgo](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/LC_FindAInListByBestAlgo.java)
 #### Задача 3
 
 Дан список строк {"a", "bb", "ccc", "dddd"}. Создайте новый список, содержащий только строки
@@ -79,7 +79,7 @@ private static void solution(List<String> list) {
 }
 ```
 
-> Решение: [CreateListWithMoreThanTwoSymboles](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/CreateListWithMoreThanTwoSymboles.java)
+> Решение: [LC_CreateListWithMoreThanTwoSymboles](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/LC_CreateListWithMoreThanTwoSymboles.java)
 #### Задача 4
 
 ```java
@@ -97,9 +97,8 @@ class Solution {
 }
 ```
 
-Решение: [RemoveDuplicatesInSortedArray](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/RemoveDuplicatesInSortedArray.java)
+Решение: [LC_RemoveDuplicatesInSortedArray](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/LC_RemoveDuplicatesInSortedArray.java)
 #### Задача 5
-
 
 ```java
 /**
@@ -130,6 +129,7 @@ class Solution {
     }
 ```
 
+Решение: [ParseHolder](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/service/ParseHolder.java)
 #### Задача 6
 
 ```java
@@ -162,8 +162,35 @@ class Solution {
 }
 ```
 
-Решение: [FindSumOfTwoInSortedArray](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/array/FindSumOfTwoInSortedArray.java)
+Решение: [LC_FindSumOfTwoInSortedArray](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/array/LC_FindSumOfTwoInSortedArray.java)
+
+
 #### Задача 7
+
+```java
+**
+ * Дан неотсортированный массив целых чисел, вернуть индексы двух
+ * чисел, сумма которых равна заданному числу.
+ * Вы не можете использовать один и тот же элемент дважды.
+ * Пример:
+ * Given nums - [2, 7, 11, 15], target - 9.
+ * The output should be [0, 1].
+ * Because nums[0]+nums[1] 2+7=9.
+ */
+public class FindSumOfTwoInNotSortedArray {
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(findTwoOfSum(new int[]{2, 1, 4, 2, 6}, 6)));
+    }
+
+    private static int[] findTwoOfSum(int[] nums, int target) {
+        return new int[]{};
+    }
+}
+```
+
+Решение: [FindSumOfTwoInNotSortedArray](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/array/FindSumOfTwoInNotSortedArray.java)
+#### Задача 8
 
 ```java
 /*
@@ -183,11 +210,10 @@ private static boolean bracketCheck (String str) {
 }
 ```
 
-#### Задача 8
-
+Решение: [LC_ValidateBrackets](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/LC_ValidateBrackets.java)
+#### Задача 9
 
 ```java
-
 /**
 * Есть массив слов
 * Написать функцию, которая определяет самый длинный общий префикс
@@ -197,10 +223,10 @@ private static boolean bracketCheck (String str) {
 * Массив array {"dog","racecar","car"}
 * Самый длинный общий префикс -> ""
 */
-
 ```
 
-#### Задача 9
+Решение: [LC_LongestCommonPrefix](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/LC_LongestCommonPrefix.java)
+#### Задача 10
 
 ```java
 //Нужно написать метод, который переворачивает значение Integer:
@@ -212,9 +238,9 @@ public static int reverse(int i){
 }
 ```
 
-Решение: ReverseInteger
+Решение: [LC_ReverseInteger](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/LC_ReverseInteger.java)
 
-#### Задача 10
+#### Задача 11
 
 ```java
 
@@ -226,11 +252,7 @@ public List<Integer>sortEvenAndOdd (List<Integer> list){
 }
 ```
 
-#### Задача 11
-
-```java
-// Удалить все элементы меньше 3 не используя стримы
-```
+Решение: [LC_DivideStreamDigitsToOddAndEven](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/LC_DivideStreamDigitsToOddAndEven.java) 
 
 #### Задача 12
 
@@ -275,23 +297,16 @@ class Solution {
 * Выходные данные: 3
 * Объяснение: правильный ответ - "wke", с длиной равной 3.
 */
-
-// Решение: LengthOfLongestSubstring
 ```
+
+Решение: [LengthOfLongestSubstring](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/LC_LengthOfLongestSubstring.java)
 
 #### Задача 14
 
 ```java
-
 /**
 * Дано целое число x, вернуть true если x является палиндромом, и false в ином случае.
 */
-
-class Solution {
-    public boolean isPalindrome(int x) {
-
-    }
-}
 
 /**
 * Пример 1:
@@ -310,8 +325,13 @@ class Solution {
 * Выходные данные: false
 * Объяснение: Представляет собой 01 справа налево. И поэтому не является палиндромом.
 */
+
+public boolean isIntegerPalindrome(int x) {
+
+}
 ```
 
+Решение: [LC_IsIntegerPolyndrome](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/LC_IsIntegerPolyndrome.java) 
 #### Задача 15
 
 ```java
@@ -324,6 +344,7 @@ public int[] arrayReverse (int[] array) {
 }
 ```
 
+Решение: [LC_ArrayReverse](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/array/LC_ArrayReverse.java)
 #### Задача 16
 
 ```java
@@ -367,41 +388,7 @@ class Solution {
 */
 ```
 
-#### Задача 18
-
-```java
-/**
-* Дано 32 битное signed целое число x, "разверните" число х в обратную сторону.
-* Если развёрнутое число х имеет значение,
-* выходящее за рамки 32 битного signed целого числа [-2e31, 2e31 - 1], тогда, возвратите 0.
-*/
-
-class Solution {
-    public int reverse(int x) {
-
-    }
-}
-
-/**
-* Пример 1:
-* Входные данные: x = 123
-* Выходные данные: 321
-*
-* Пример 2:
-* Входные данные: x = -123
-* Выходные данные: -321
-*
-* Пример 3:
-* Входные данные: x = 120
-* Выходные данные: 21
-*
-* Ограничения:
-*
-* -231 <= x <= 231 - 1
-*/
-```
-
-#### Задача 19 Поменять местами два значение переменных, не используя дополнительные переменные
+#### Задача 18 Поменять местами два значение переменных, не используя дополнительные переменные
 
 Пример: 
 ```java
@@ -437,7 +424,7 @@ public class javaXor {
 }
 ```
 
-#### Задача 20 Найти уникальное число
+#### Задача 19 Найти уникальное число
 
 ```java
 // Найти уникальное число
@@ -454,7 +441,7 @@ int unique(nums int[]) {
 }
 ```
 
-#### Задача 21 
+#### Задача 20
 
 ```java
 /*
@@ -473,7 +460,7 @@ public static BigDecimal count Total Sum(BigDecimal transferSum) {
 }
 ```
 
-#### Задача 22
+#### Задача 21
 
 ```java
 // Дана последовательность чисел. Нужно её схлопнуть в строку.
@@ -521,9 +508,7 @@ public String getRange(int[] numbers) {
     return result.toString();
 }
 ```
-
-
-#### Задача 23
+#### Задача 22
 
 ```java
 public static void main(String[] args) {
@@ -542,7 +527,7 @@ public static Map<String, Integer> transform (final Integer... nums) {
 }
 ```
 
-#### Задача 24 
+#### Задача 23
 
 ```java
 /*
@@ -557,12 +542,12 @@ private static int findClosestToTen(int[] array) {
 }
 ```
 
-Решение: FindClosestToTen
-#### Задача 25
+Решение: [LC_FindClosestToTen](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/LC_FindClosestToTen.java)
+#### Задача 24
 
 ```java
 /*
-Найти второй максимально число
+Найти второе максимально число
 Например: 
 [3,9,4,0,8,1] -> 8
 [1000,7,12,0,5,3] -> 12
@@ -580,8 +565,7 @@ public class FindSecondMax {
 ```
 
 Решение: LC_FindSecondMaxInArray
-
-#### Задача 26
+#### Задача 25
 
 ```java
 // строка, считаем символы, выводим кол-во вхождений каждого
@@ -590,7 +574,7 @@ public String getSummary (String string) {
 }
 ```
 
-#### Задача 27
+#### Задача 26
 
 ```java
 // проверить все ли символы являются буквами
@@ -599,7 +583,7 @@ public boolean isAllLetters (String string) {
 }
 ```
 
-#### Задача 28
+#### Задача 27
 
 ```java
 // объеденить слова в одну строку с делиметром
@@ -612,30 +596,5 @@ public static void main(String[] args) {
 }
 ```
 
-#### Задача 29
+#### Задача 28
 
-```java
-**
- * Дан неотсортированный массив целых чисел, вернуть индексы двух
- * чисел, сумма которых равна заданному числу.
- * Вы не можете использовать один и тот же элемент дважды.
- * Пример:
- * Given nums - [2, 7, 11, 15], target - 9.
- * The output should be [0, 1].
- * Because nums[0]+nums[1] 2+7=9.
- */
-public class FindSumOfTwoInNotSortedArray {
-
-    public static void main(String[] args) {
-        System.out.println(Arrays.toString(findTwoOfSum(new int[]{2, 1, 4, 2, 6}, 6)));
-    }
-
-    private static int[] findTwoOfSum(int[] nums, int target) {
-        return new int[]{};
-    }
-}
-```
-
-Решение: [FindSumOfTwoInNotSortedArray](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/array/FindSumOfTwoInNotSortedArray.java)
-
-#### Задача 30
