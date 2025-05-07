@@ -29,31 +29,7 @@
 - **Поиск в графах**:
     - BFS (поиск в ширину).
     - DFS (поиск в глубину).
-#### Какие основные классы в Spring Security знаешь?
 
-SecurityContextHolder
-
-```java
-Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-```
-
-**`Authentication`** Представляет аутентифицированного пользователя:
-- `Principal` (логин пользователя)
-- `Credentials` (пароль)
-- `Authorities` (роли/права)
-    
-**`AuthenticationManager`** Интерфейс для аутентификации:
-```java
-Authentication authenticate(Authentication auth) throws AuthenticationException;
-```
-
-**`UserDetailsService`** Загружает пользователя по имени (например, из БД):
-
-```java
-UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
-```
-
-Загружает пользователя по имени (например, из БД):
 #### Какая ошибка при изменении коллекции от List.of() 
 UnsupportedOperationException
 #### Что такое force push
@@ -82,59 +58,7 @@ UnsupportedOperationException
     3. **Ссылка на текущий класс** (для `this`).
     4. **Возвращаемое значение**.
     5. **Ссылка на константы**.
-#### Что такое on update, on delete
 
-- **`ON DELETE CASCADE`**: Удаляет дочерние записи при удалении родителя.
-- **`ON DELETE SET NULL`**: Заменяет внешний ключ на `NULL`.
-- **`ON UPDATE CASCADE`**: Обновляет дочерние записи при изменении родителя.
-
-```sql
-CREATE TABLE Orders (
-    user_id INT,
-    FOREIGN KEY (user_id) REFERENCES Users(id) 
-        ON DELETE CASCADE
-        ON UPDATE SET NULL
-);
-```
-#### LEFT JOIN vs LEFT OUTER JOIN
-
-- **`LEFT JOIN`** и **`LEFT OUTER JOIN`** — это одно и то же.
-- Возвращает **все строки из левой таблицы** + совпадения из правой.
-- Если совпадений нет, правые поля будут `NULL`.
-#### Допускает ли UNIQUE значения множество null значения, как не не допускать несколько null значений
-
-- **`UNIQUE`**: Запрещает дубликаты, но разрешает один `NULL`.
-- **`UNIQUE + NOT NULL`**: Запрещает и дубликаты, и `NULL`.
-#### В чем разница DDL, DML, DCL
-
-- **DDL** (Data Definition): `CREATE`, `ALTER`, `DROP`
-- **DML** (Data Manipulation): `SELECT`, `INSERT`, `UPDATE`, `DELETE`
-- **DCL** (Data Control): `GRANT`, `REVOKE`
-
-#### Какие есть триггеры в SQL?
-
-```SQL
-CREATE TRIGGER log_update 
-AFTER UPDATE ON orders FOR EACH ROW 
-INSERT INTO audit_log VALUES(NEW.id, NOW());
-```
-#### Что такое CTE (with) in SQL
-
-Временный результат для сложных запросов:
-
-```sql
-WITH temp AS (SELECT * FROM users WHERE age > 18) 
-SELECT * FROM temp;
-```
-#### Char vs varchar
-
-- **CHAR(10)** — всегда 10 символов (дополняет пробелами).
-- **VARCHAR(10)** — до 10 символов (экономит место).
-#### Виды оконных функций
-
-- `ROW_NUMBER()` — нумерация строк.
-- `RANK()` — ранжирование с пропусками.
-- `SUM() OVER (PARTITION BY group)` — сумма по группам.
 #### Почему Perm Gen был изменен на Metaspace?
 
 - **PermGen**: Фиксированный размер, OutOfMemoryError.
@@ -155,12 +79,10 @@ SELECT * FROM temp;
 // Псевдокод
 volatile Object[] array = new Object[10];
 
-void add(Object item) {
-    lock();
+void syncrhonized add(Object item) {
     Object[] newArray = Arrays.copyOf(array, array.length + 1);
     newArray[newArray.length - 1] = item;
-    array = newArray; // Атомарная замена ссылки
-    unlock();
+    array = newArray;
 }
 ```
 #### Что такое Json Schema?
@@ -176,6 +98,7 @@ void add(Object item) {
 }
 ```
 
+#### Unique index
 #### Поле `type` в JSON Schema
 
 ```json

@@ -1,16 +1,8 @@
 ## QA. 1
 
-###### Что такое частичный индекс?
-
-- Создается только для тех строк таблицы, которые удовлетворяют определенному условию. Это значит, что индекс будет использоваться только для части данных, а не для всей таблицы
-
-```sql
-CREATE INDEX idx_unfinished_orders ON orders (order_date) WHERE status = 'pending';
-```
-
 ###### Зачем нужны свойства ACID в работе с базами данных? Как они применяются в транзакциях?
 
-- [[../../../_inforage/Базы данных/Storage/Транзакции/ACID]]
+- [[../../../_inforage/Базы_данных/Storage/Транзакции/ACID]]
 - Atomicity - говорит что транзакция, выполниться полностью или не выполниться вообще. Не допустимо выполнение отдельных операций
 - Consistency - согласованность данных, если кто-то выкупил товар, другой пользователь не может купить снова уже несуществующий товар
 - Isolation - транзакции могут быть иметь разного уровня изоляции.
@@ -74,18 +66,19 @@ UNION
 SELECT first_name, middle_name, "student" as role FROM Student
 ```
 
+#### Union vs Union ALL
 ###### Примеры денормализации, в сторону оптимизации.
 
-- [[../../../_inforage/Базы данных/Storage/Денормализация]]
+- [Подробнее](_inforage/Базы_данных/Storage/Денормализация.md)
 
 ###### Как работает составной индекс?
 
-- [[../../../_inforage/Базы данных/Storage/Индексирование#Составной индекс]]
+- [[../../../_inforage/Базы_данных/Storage/Индексирование#Составной индекс]]
 
 ###### Какие существуют уровни изолированности транзакций и их проблемы?
 
-- [[../../../_inforage/Базы данных/Storage/Изоляции транзакций]]
-- [[../../../_inforage/Базы данных/Storage/Изоляции транзакций#Проблемы изоляции]]
+- [[../../../_inforage/Базы_данных/Storage/Изоляции транзакций]]
+- [[../../../_inforage/Базы_данных/Storage/Изоляции транзакций#Проблемы изоляции]]
 
 ###### В чем отличие синхронной транзакций от асинхронной?
 
@@ -128,7 +121,7 @@ SELECT first_name, middle_name, "student" as role FROM Student
 
 ###### В чем разница между подходами BASE и ACID в контексте баз данных? BASE vs ACID
 
-[Краткое описание различий между ACID и BASE](../../../_inforage/Базы%20данных/Storage/BASE.md#Краткое%20описание%20различий%20между%20ACID%20и%20BASE)
+[Краткое описание различий между ACID и BASE](../../../_inforage/Базы_данных/Storage/BASE.md#Краткое%20описание%20различий%20между%20ACID%20и%20BASE)
 
 ###### Назови ddl запросы?
 
@@ -166,6 +159,14 @@ CREATE INDEX idx_full_text_search ON articles USING gin (to_tsvector('english', 
 CREATE INDEX idx_active_users ON users (last_name)
 WHERE active = true;
 ```
+
+###### Что такое частичный индекс?
+
+- Создается только для тех строк таблицы, которые удовлетворяют определенному условию. Это значит, что индекс будет использоваться только для части данных, а не для всей таблицы
+
+```sql
+CREATE INDEX idx_unfinished_orders ON orders (order_date) WHERE status = 'pending';
+```
 ###### Какие структуры индексов есть?
 
 - **B-tree** — стандартная структура для большинства индексов в PostgreSQL. Используется для поиска по диапазонам и равенствам.
@@ -189,13 +190,64 @@ WHERE active = true;
 - AVG(total) OVER (PARTITION BY user_id ORDER BY start_date) AS avg_expenses
 - ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY start_date) AS row_num Присваивает уникальный номер каждой строке в окне (сортировка обязательна).
 - RANK() OVER (PARTITION BY user_id ORDER BY total DESC) AS rank Присваивает уникальные ранги строкам в окне, при этом строки с одинаковыми значениями получают одинаковый рейтинг, но пропускается следующий ранг.
-
-
 ###### Чем отличается view от materialist view?
 
 - **View** = "Окно" в реальные данные (всегда актуально, но медленно).
 - **Materialized View** = "Снимок" данных (быстро, но требует обновления).
 
+#### Что такое on update, on delete
+
+- **`ON DELETE CASCADE`**: Удаляет дочерние записи при удалении родителя.
+- **`ON DELETE SET NULL`**: Заменяет внешний ключ на `NULL`.
+- **`ON UPDATE CASCADE`**: Обновляет дочерние записи при изменении родителя.
+
+```sql
+CREATE TABLE Orders (
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES Users(id) 
+        ON DELETE CASCADE
+        ON UPDATE SET NULL
+);
+```
+#### LEFT JOIN vs LEFT OUTER JOIN
+
+- **`LEFT JOIN`** и **`LEFT OUTER JOIN`** — это одно и то же.
+- Возвращает **все строки из левой таблицы** + совпадения из правой.
+- Если совпадений нет, правые поля будут `NULL`.
+#### Допускает ли UNIQUE значения множество null значения, как не не допускать несколько null значений
+
+- **`UNIQUE`**: Запрещает дубликаты, но разрешает один `NULL`.
+- **`UNIQUE + NOT NULL`**: Запрещает и дубликаты, и `NULL`.
+#### В чем разница DDL, DML, DCL
+
+- **DDL** (Data Definition): `CREATE`, `ALTER`, `DROP`
+- **DML** (Data Manipulation): `SELECT`, `INSERT`, `UPDATE`, `DELETE`
+- **DCL** (Data Control): `GRANT`, `REVOKE`
+
+#### Какие есть триггеры в SQL?
+
+```SQL
+CREATE TRIGGER log_update 
+AFTER UPDATE ON orders FOR EACH ROW 
+INSERT INTO audit_log VALUES(NEW.id, NOW());
+```
+#### Что такое CTE (with) in SQL
+
+Временный результат для сложных запросов:
+
+```sql
+WITH temp AS (SELECT * FROM users WHERE age > 18) 
+SELECT * FROM temp;
+```
+#### Char vs varchar
+
+- **CHAR(10)** — всегда 10 символов (дополняет пробелами).
+- **VARCHAR(10)** — до 10 символов (экономит место).
+#### Виды оконных функций
+
+- `ROW_NUMBER()` — нумерация строк.
+- `RANK()` — ранжирование с пропусками.
+- `SUM() OVER (PARTITION BY group)` — сумма по группам.
 ###### Можно ли в рамках одной транзакции делать действия в разных БД?
 
 ###### Почему мы везде не можем использовать serializable?

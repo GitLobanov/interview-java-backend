@@ -16,4 +16,4 @@
 
 ## SQL
 
-- [SQL](SQL/LC_SQL.md)
+- [SQL](SQL/LC_SET_SQL_1.md)

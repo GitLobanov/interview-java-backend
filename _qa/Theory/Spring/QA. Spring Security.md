@@ -61,7 +61,7 @@
 
 ```
 //получение 
-SecurityContext SecurityHolderContext.getContext()
+SecurityContext ctx = SecurityHolderContext.getContext()
 ```
 
 Объект, возвращаемый методом `getContext()` это `SecurityContext`. Он позволяет получать и устанавливать объект `Authentication`. `Authentication` представляет следующие свойства:
@@ -156,11 +156,62 @@ UserCases:
 3. **Добавление дополнительной логики безопасности**. Проверка IP-адреса клиента, ограничение количества запросов или анализ поведения пользователя.
 4. **Обработка нестандартных сценариев**.  Если нужно реализовать двухфакторную аутентификацию или другие сложные механизмы.
 5. **Логирование и мониторинг** (ELK, Prometheus). Фильтр для записи информации о запросах в логи или отправки её в систему мониторинга. Добавление в Mapped Diagnostic Context - cliendId
-
-
-
 ###### Из чего состоит JWT 
 
 ![](../../../_res/Pasted%20image%2020250412110803.png)
 
 ###### Filter vs Interceptor
+
+**Интерцепторы** позволяют организовать действия до и после обработки контроллера, поддерживают создание цепочек для более детализированного управления запросами и подходят для осуществления проверки авторизации и других задач, требующих информации о HandlerMethod. В свою очередь, **фильтры**, работающие на уровне Java Servlet, обладают универсальностью и вполне способны модифицировать запросы ещё до обработки в Spring MVC, до попадания в Dispatcher Servlet.
+
+Рекомендуется настраивать **фильтры** через `web.xml` или Java-конфигурацию с использованием `@WebFilter`. Это позволит им работать с запросами и ответами на уровне сервлетов. **Интерцепторы**, как часть экосистемы Spring, настраиваются через MVC-конфигурацию или с использованием `HandlerInterceptor` для управления сложным поведением.
+
+```java
+// Пример интерцептора:
+@Override
+public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+    // Код, запускающийся до выполнения контроллера
+    return true; // Если true, выполнение продолжит свой ход
+}
+
+@Override
+public void postHandle(HttpServletRequest request, HttpServletResponse response, 
+                       Object handler, ModelAndView modelAndView) {
+    // Код, запускающийся после выполнения контроллера
+}
+
+// Пример фильтра:
+@Override
+public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) 
+        throws IOException, ServletException {
+    // Код, работающий до запуска цепочки фильтров
+    chain.doFilter(request, response); // Вызов остальных фильтров в цепочке
+    // Код, работыющий после прохождения цепочки фильтров
+}
+```
+
+#### Какие основные классы в Spring Security знаешь?
+
+SecurityContextHolder
+
+```java
+Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+```
+
+**`Authentication`** Представляет аутентифицированного пользователя:
+- `Principal` (логин пользователя)
+- `Credentials` (пароль)
+- `Authorities` (роли/права)
+    
+**`AuthenticationManager`** Интерфейс для аутентификации:
+```java
+Authentication authenticate(Authentication auth) throws AuthenticationException;
+```
+
+**`UserDetailsService`** Загружает пользователя по имени (например, из БД):
+
+```java
+UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+```
+
+Загружает пользователя по имени (например, из БД):

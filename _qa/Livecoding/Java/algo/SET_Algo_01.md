@@ -155,10 +155,8 @@ class Solution {
  * Выходные данные: [0,1]
  */
 
-class Solution {
-    public int[] twoSum(int[] nums, int target) {
+public int[] twoSum(int[] nums, int target) {
 
-    }
 }
 ```
 
@@ -267,6 +265,7 @@ public class BubbleSort(){
 }
 ```
 
+Решение: [LC_BubbleSort](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/sort/LC_BubbleSort.java)
 #### Задача 13
 
 ```java
@@ -364,19 +363,12 @@ public static int[] solve(int[] arr) {
 }
 ```
 
+Решение: [LC_MaxMinArrays](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/array/LC_MaxMinArrays.java)
 #### Задача 17
 
 ```java
 /**
 * Дана String s, возвратите самую длинную палиндромную подстроку из s
-*/
-class Solution {
-    public String longestPalindrome(String s) {
-
-    }
-}
-
-/**
 * Пример 1:
 * Входные данные: s = "babad"
 * Выходные данные: "bab"
@@ -386,13 +378,20 @@ class Solution {
 * Входные данные: s = "cbbd"
 * Выходные данные: "bb"
 */
+public String longestPalindrome(String s) {
+
+}
 ```
 
-#### Задача 18 Поменять местами два значение переменных, не используя дополнительные переменные
+Решение: [LC_LongsetPalindromeInString](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/LC_LongsetPalindromeInString.java)
+#### Задача 18
 
 Пример: 
 ```java
-// b = 7, a = 8 -> b = 8, a = 7
+/**
+* Поменять местами два значение переменных, не используя дополнительные переменные
+* b = 7, a = 8 -> b = 8, a = 7
+**/
 public static void main(String[] args) {
 	int a = 7;
 	int b = 8;
@@ -401,29 +400,7 @@ public static void main(String[] args) {
 }
 ```
 
-Решение:
-
-1 решение
-
-```java
-public class javaXor {
-    public static void main(String[] args) {
-        // binary of 7=0111
-        int a = 7;
-        // binary of 8=1000
-        int b = 8;
-        // swapping using java XOR operator
-        // now a is 1111 15 and b is 8
-        a = a ^ b;
-        //now a is 1111 15 but b is 7 (original value of a)
-        b = a ^ b;
-        // now a is 8 and b is 7, numbers are swapped
-        a = a ^ b;
-		System.out.println("a: " + a + " b: " + b);
-    }
-}
-```
-
+Решение: [LC_SwapValueBetweenTwoVariablesWithoutThirdValue](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/math/LC_SwapValueBetweenTwoVariablesWithoutThirdValue.java)
 #### Задача 19 Найти уникальное число
 
 ```java
