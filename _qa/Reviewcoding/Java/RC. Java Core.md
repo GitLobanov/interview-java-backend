@@ -326,3 +326,237 @@ public static void main(String[] args) {
 
 #### Задача 15
 
+```java
+public class Main {
+    public static void main(String[] args) {
+        try {
+            int[] arr = new int[5];
+            arr[100] = 500;
+            System.out.println(1);
+        } catch (ArithmeticException e) {
+            System.out.println(2);
+        }
+    }
+}
+```
+
+#### Задача 16
+
+```java
+public class Incrementer {
+    static int base = 10;
+    public static int increment() {
+        return ++base;
+    }
+    public static void main(String[] args) {
+        System.out.println(Incrementer.increment());
+        System.out.println(Incrementer.increment());
+    }
+}
+```
+
+#### Задача 17
+
+```java
+System.out.print("Hello");
+while (1) {
+    System.out.println(" World");
+    break;
+}
+```
+
+#### Задача 18
+
+```java
+int day = 4;
+switch (day) {
+    case 1:
+        System.out.print("One");
+        break;
+    case 2:
+    case 4:
+        System.out.print("Four");
+        day = 1;
+    case 5:
+        System.out.print("Five");
+}
+```
+
+#### Задача 19
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        var set = new HashSet<Integer>();
+        Random random = new Random();
+        for (int i = 0; i < 100; i++) {
+            set.add(random.nextInt(10));
+        }
+        System.out.println(set.size());
+    }
+}
+```
+
+#### Задача 20
+
+```java
+interface A { default void method() { System.out.println("A"); } }
+interface B { default void method() { System.out.println("B"); } }
+class C implements A, B {} 
+```
+
+Решение:
+
+Несмотря на `default`-реализации, если класс реализует два интерфейса с **одинаковыми методами по сигнатуре**, он **обязан** явно переопределить конфликтующий метод, даже если оба интерфейса предоставляют реализацию. Будет ошибка компиляции
+#### Задача 21
+
+Включен Parallel GC, была обнаружена утечка памяти, коллега указал что здесь проблема в циклическое зависимости, так ли это?
+
+```java
+class Node {
+    private Node edge;
+    public void setEdge(Node edge) { this.edge = edge; }
+}
+
+public void createAndDelete() {
+	// здесь циклическая зависемость?
+    Node node1 = new Node();
+    Node node2 = new Node();
+    node1.setEdge(node2);
+    node2.setEdge(node1);
+}
+```
+
+#### Задача 22
+
+```java
+public class Main {
+    static boolean foo(char a) {
+        System.out.println(a);
+        return true;
+    }
+
+    public static void main(String[] args) {
+        int i = 0;
+        for (foo('A'); foo('B') && (i < 2); foo('C')) {
+            i++;
+            foo('D');
+        }
+        foo('D');
+    }
+}
+```
+
+#### Задача 23
+
+```java
+public class Main {
+    public static void foo(Integer i) {
+        System.out.println("foo(Integer)");
+    }
+    public static void foo(short i) {
+        System.out.println("foo(short)");
+    }
+    public static void foo(long i) {
+        System.out.println("foo(long)");
+    }
+    public static void foo(Object i) {
+        System.out.println("foo(object)");
+    }
+    public static void foo(int... i) {
+        System.out.println("foo(int...)");
+    }
+    public static void main (String[] args) {
+	    foo (10);
+    }
+}
+```
+
+#### Задача 24
+
+```java
+// Какой вариант инициализации переменной приведет к ошибке?
+class Box<T> {
+    T value;
+    public Box (T value) {
+        this.value = value;
+    }
+}
+
+public static void main(String[] args) {
+    Box<? super String> b1 = new Box<> (123);
+    Box<? extends String> b2 = new Box<>("123");
+    Box<? extends Number> b3 = new Box<>(123);
+    Box<? super Number> b4 = new Box<>(123L);
+}
+```
+
+#### Задача 25
+
+```java
+// Что выведеться?
+class Test {
+    static void m(Object o) {
+        System.out.println("one");
+    }
+
+    static void m(String[] o) {
+        System.out.println("two");
+    }
+
+    static <T> T g() {
+        return null;
+    }
+
+    public static void main(String[] args) {
+        m(g());
+    }
+}
+```
+
+#### Задача 26
+
+Классы иммутабельные?
+
+```java
+public class ImmutableBankTransaction {
+    
+    public StringBuilder transactionId;
+    public StringBuilder fromAccount;
+    public StringBuilder toAccount;
+    public BigDecimal amount;
+    public LocalDateTime timestamp;
+    public Map<String, StringBuilder> metadata;
+    public List<String> statusHistory;
+
+    public ImmutableBankTransaction(
+            StringBuilder transactionId,
+            StringBuilder fromAccount,
+            StringBuilder toAccount,
+            BigDecimal amount,
+            LocalDateTime timestamp,
+            Map<String, String> metadata,
+            List<String> statusHistory) {
+        this.transactionId = transactionId;
+        this.fromAccount = fromAccount;
+        this.toAccount = toAccount;
+        this.amount = amount;
+        this.timestamp = timestamp;
+        this.metadata = metadata;
+        this.statusHistory = statusHistory;
+    }
+}
+
+public class ImmutableBankTransactions {
+    
+    public HashMap<StringBuilder, ImmutableBankTransaction> immutableHashMap = HashMap();
+
+    public ImmutableBankTransactions(HashMap<StringBuilder, ImmutableBankTransaction> outsideMap) {
+	    immutableHashMap = outsideMap;
+    }
+
+	public ImmutableBankTransaction getByTransactionId(StringBuilder transactionId) {
+		return immutableHashMap.get(transactionId);
+	}
+}
+```

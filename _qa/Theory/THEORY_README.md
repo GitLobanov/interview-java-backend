@@ -1,140 +1,38 @@
-#### Что храниться в MetaSpace
+## Вопросы по теории:
 
-- **Метаданные классов** (Class metadata):
-    - Структуры классов (имена, методы, поля, аннотации).
-    - Bytecode методов.
-    - Константы (String Pool, кроме примитивов).
-- **Загруженные ClassLoader'ы**.
-- **JIT-оптимизированный код** (в некоторых реализациях JVM).
-- Metaspace использует **нативную память** (не ограничена `-Xmx`).
-- Лимит задаётся флагами:
-    -XX:MaxMetaspaceSize=256m  # Максимальный размер
-    -XX:MetaspaceSize=64m      # Начальный размер
-#### Какие нормальные формы знаешь?
+Также доступен - Формат интервальных карточек[ для Anki](https://ankiweb.net/shared/info/983009660?cb=1747307307338)
+### Java
 
-1. **1НФ**: Все атрибуты атомарны (нет массивов/списков в ячейках).
-2. **2НФ**: 1НФ + нет частичных зависимостей от ключа (все поля зависят от всего PK).
-3. **3НФ**: 2НФ + нет транзитивных зависимостей (поля зависят только от PK).
-4. **BCNF (Бойса-Кодда)**: Усиленная 3НФ (нет зависимостей атрибутов PK от не-PK полей).
-5. **4НФ**: Нет многозначных зависимостей.
-6. **5НФ**: Нет зависимостей соединения.
+- [Java Core](Java/core/QA_Java_Core_Junior.md)
+- [Java многопоточка](Java/core/QA_Java_Multithreading.md)
+- [Java. Function](Java/core/QA_Java_Function.md)
+- [Java. Stream API](Java/core/QA_Java_Stream_API.md)
+- [Тестирование](Java/QA_Testing.md)
+- [Hibernate](Java/QA_Hibernate)
+- [Servlets](Java/QA_Servlets.md)
+- [Java. Reactive](Java/core/QA_Java_Reactive.md)
+- [Алгоритмы](Java/QA_Algorithms.md)
+### Spring
 
-#### Какие алгоритмы поиска знаешь?
-- **Линейный поиск** (`O(n)`) — перебор элементов.
-- **Бинарный поиск** (`O(log n)`) — для отсортированных массивов.
-- **Поиск в хеш-таблицах** (`O(1)` в среднем) — по ключу.
-- **Поиск в деревьях**:
-    - Двоичное дерево (`O(n)` в худшем случае).
-    - AVL/Красно-черное дерево (`O(log n)`).
-- **Поиск в графах**:
-    - BFS (поиск в ширину).
-    - DFS (поиск в глубину).
+- [Spring Core](Spring/QA_Spring_Core.md)
+- [Spring Boot](Spring/QA_Spring_Boot.md)
+- [Spring Cloud](Spring/QA_Spring_Cloud.md)
+- [Spring MVC](Spring/QA_Spring_MVC.md)
+- [Spring Security](Spring/QA_Spring_Security.md)
+### Infrastructure
 
-#### Какая ошибка при изменении коллекции от List.of() 
-UnsupportedOperationException
-#### Что такое force push
+- [Git](Infrastructure/QA_Git.md)
+- [БД](Infrastructure/QA_DB.md)
+- [Kafka](Infrastructure/QA_Kafka.md)
+### DevOps
 
-- git push --force  # Перезаписывает историю удалённого репозитория.
-- **Опасность**: Может удалить коммиты других разработчиков.
-- Аналог: git push --force-with-lease  # Отменяет push, если ветка изменилась.
-#### Настройки памяти и gc (-Xms, -Xmx, -Xss, -XX:+Use...)
+- [General. DevOps](DevOps/QA_DevOps.md)
+- [Docker](DevOps/QA_Docker.md)
+- [Kubernetes](DevOps/QA_Kubernetes.md)
+### Architecture
 
-```bash
--Xms256m  # Начальный размер хипа
--Xmx1024m # Максимальный размер
-```
-
-```bash
--XX:+UseG1GC            # Garbage-First (по умолчанию с Java 9)
--XX:+UseParallelGC      # Parallel GC
--XX:+UseConcMarkSweepGC # CMS (устарел)
--XX:+UseZGC             # ZGC (для больших хипов)
-```
-#### Из чего состоит стэк?
-
-- **Фреймы стека** (Stack Frames) — на каждый вызов метода:
-    1. **Локальные переменные**.
-    2. **Операндный стек** (для вычислений).
-    3. **Ссылка на текущий класс** (для `this`).
-    4. **Возвращаемое значение**.
-    5. **Ссылка на константы**.
-
-#### Почему Perm Gen был изменен на Metaspace?
-
-- **PermGen**: Фиксированный размер, OutOfMemoryError.
-- **Metaspace**: Автомасштабирование в нативной памяти.
-#### Многопоточные коллекции
-
-- `ConcurrentHashMap`
-- `CopyOnWriteArrayList`
-- `BlockingQueue`
-
-#### Как работает CopyOnArrayList
-
-- При **записи** создается **новая копия** массива (старый массив остается для чтения).
-- Чтение **без блокировок** (из "старого" массива).
-- Запись **с блокировкой** (чтобы избежать конфликтов).
-
-```java
-// Псевдокод
-volatile Object[] array = new Object[10];
-
-void syncrhonized add(Object item) {
-    Object[] newArray = Arrays.copyOf(array, array.length + 1);
-    newArray[newArray.length - 1] = item;
-    array = newArray;
-}
-```
-#### Что такое Json Schema?
-
-Схема для валидации JSON
-
-```json
-{
-  "type": "object",
-  "properties": {
-    "age": { "type": "number", "minimum": 18 }
-  }
-}
-```
-
-#### Unique index
-#### Поле `type` в JSON Schema
-
-```json
-{
-  "type": "string"  // Допустимые: "object", "array", "number", "boolean", "null"
-}
-```
-
-#### Валидация в Open API
-
-OpenAPI (Swagger) позволяет валидировать структуру и типы данных в запросах/ответах.
-
-```yaml
-components:
-  schemas:
-    UserDTO:
-      type: object
-      properties:
-        id: 
-          type: integer
-          format: int64
-        name: 
-          type: string
-          minLength: 1
-      required: [id, name]
-```
-
-#### Что такое кафка Streams?
-
-Библиотека для обработки потоков данных в Kafka (аналогично стримам в Java).
-
-#### Плюсы gRPC
-
-1. Скорость (бинарный Protocol Buffers).
-2. Автогенерация кода.
-3. Поддержка потоков. (One to One, One to Many and etc.)
-4. HTTP/2.
-
-
+- [Microservices](Architecture/QA_Microservices.md)
+- [Patterns](Architecture/QA_Patterns.md)
+- [Rest]
+- [Сборщик проектов]
+- [gRPC]

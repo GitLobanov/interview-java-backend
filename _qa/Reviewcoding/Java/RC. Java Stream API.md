@@ -192,3 +192,36 @@ private static void task4() {
 }
 ```
 
+#### Задача 13
+
+```java
+// что выведется?
+final List<Integer> ints = new ArrayList<>();
+    
+IntStream.range(0, 1000000)    
+     .parallel()
+     .forEach(i -> ints.add(i));
+     
+System.out.println(ints.size());
+```
+
+#### Задача 14
+
+```java
+// Что выведется
+
+IntStream.range(0, 10)    
+     .skip(2)
+     .dropWhile(x -> x < 5)
+     .limit(3)
+     .forEach(System.out::println);
+// 
+IntStream.range(0, 10)
+    .skip(3)
+    .takeWhile(x -> x < 5)
+    .limit(3)
+    .forEach(System.out::println);
+// 
+```
+
+

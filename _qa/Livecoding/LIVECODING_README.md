@@ -5,10 +5,10 @@
 	- [SET_02](Java/algo/SET_Algo_02.md)
 	- [SET_03](Java/algo/SET_Algo_03.md)
 - [Hibernate](Java/LC_Hibernate.md)
-- [Core](Java/LC_Java_Core.md)
+- [Core](Java/javacore/SET_Java_Core_01.md)
 - [Regex](Java/LC_Java_Regex.md)
 - [Write something](Java/LC_Java_Write_Something.md)
-- [Stream API](Java/LC_Stream_API.md)
+- [Stream API](Java/streamapi/SET_Stream_API_01.md)
 
 ## Rest
 

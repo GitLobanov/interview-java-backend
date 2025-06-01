@@ -370,6 +370,48 @@ JWT состоит из трех частей, разделенных точка
 
 ###### Что такое MultiPartFile
 
+#### Что такое Json Schema?
+
+Схема для валидации JSON
+
+Набор **правил** для проверки JSON. JSON Schema **описывает** структуру данных, а затем на его основе можно **автоматически создавать DTO**, экономя время и снижая вероятность ошибок.
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "age": { "type": "number", "minimum": 18 }
+  }
+}
+```
+#### Поле `type` в JSON Schema
+
+```json
+{
+  "type": "string"  // Допустимые: "object", "array", "number", "boolean", "null"
+}
+```
+
+#### Валидация в Open API
+
+OpenAPI (Swagger) позволяет валидировать структуру и типы данных в запросах/ответах.
+
+```yaml
+components:
+  schemas:
+    UserDTO:
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+        name: 
+          type: string
+          minLength: 1
+      required: [id, name]
+```
+
+
 ## Задачи
 
 ###### Спроектируй путь запроса (URL) для получения адреса клиента?

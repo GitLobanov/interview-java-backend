@@ -407,17 +407,17 @@ public static void main(String[] args) {
 // Найти уникальное число
 // Решить без использования других структур данных, минимум за O(n)
 int[] nums = {1, 1, 1, 2, 3, 3, 4, 4, 8, 8}; // 2
-int[] nums = {1, 1, 1, 2, 2, 3, 3, 4, 4, 8, 9}; // 9
-int[] nums = {3, 3, 7, 7, 10, 11, 11}; // 10
-int[] {1}
-int[] {1,2}
-null
-int[] {}
-int unique(nums int[]) {
-	return null;
+int[] nums = {1, 1, 1, 2, 2, 3, 3, 4, 4, 8, 8, 9}; // 9
+int[] {1} // 1
+int[] {1,2} // 1
+null // 0
+int[] {} // 0
+private static int unique(nums int[]) {
+	return 0;
 }
 ```
 
+> Решение: [LC_FindUniqueNumberInArray](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/array/LC_FindUniqueNumberInArray.java)
 #### Задача 20
 
 ```java
@@ -426,17 +426,17 @@ int unique(nums int[]) {
 Необходимо избегать конструкции выбора (if-else, switch-case, filter и Т.д.).
 Известно что на вход приходят валидные данные. Сумма не может быть меньше 0, но может быть 0.
 Комиссии за суммы:
-< 1_000р - 0%
+... < 1_000р - 0%
 1 000р - 1%
 10 000р - 2%
-100_000р - 5%
-1000 000р
+100 000р < ... - 5%
 */
-public static BigDecimal count Total Sum(BigDecimal transferSum) {
+public static BigDecimal countTotalSum(BigDecimal transferSum) {
 	return null;
 }
 ```
 
+> Решение: [LC_СalculatingСommission](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/service/LC_СalculatingСommission.java)
 #### Задача 21
 
 ```java
@@ -447,71 +447,18 @@ public String getRange(int[] numbers) {
 }
 ```
 
-###### Решение
-
-```java
-// Дана последовательность чисел. Нужно её схлопнуть в строку.
-// [6,1,2,3, 7,0, 9] => "0-3, 6-7, 9". Числа неотрицательные.
-public String getRange(int[] numbers) {
-    if(numbers==null || numbers.length<2){
-        return "";
-    }
-    Arrays.sort(numbers);
-    StringBuilder result = new StringBuilder();
-    
-    int start = numbers[0];
-    int finish = start;
-    
-    for(int i = 1; i<numbers.length; i++){
-
-        if (numbers[i]==finish+1){
-            finish = numbers[i];
-        } else {
-            result.append(start).append("-").append(finish);
-            
-            start=numbers[i];
-            finish=start;
-            
-            if (i<numbers.length-1){
-                result.append(", ");
-            } else{
-                result.append(finsh);
-            }
-        
-        }
-        
-    }
-    
-    return result.toString();
-}
-```
+> Решение: [LC_FormatToRange](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/string/LC_FormatToRange.java)
 #### Задача 22
-
-```java
-public static void main(String[] args) {
-	Integer[] input = {1, 2, 5, 4, 4, 5, 2, 3, 6, 5};
-	System.out.println(transform(input));
-}
-
-/*
-В результате нет 4 и 6.
-Ключ - преобразованный элемент стрима.
-Значение - кол-во вхождений данного элемента в стриме
-Пример: "3-hello": 1
-*/
-public static Map<String, Integer> transform (final Integer... nums) {
-	return;
-}
-```
-
-#### Задача 23
 
 ```java
 /*
 Написать метод поиска в массиве ближайшего к 10 числа
 */
 public static void main(String[] args) {
-	System.out.println(findClosestToTen(new int[]{-15, -35, 200, 29, 78}));
+        System.out.println(findClosestToTen(new int[]{-15, -35, 200, 29, 78}));  // 29
+        System.out.println(findClosestToTen(new int[]{9, 12}));                  // 9 (или 12 - одинаково близки)
+        System.out.println(findClosestToTen(new int[]{10, 5, 15}));              // 10
+        System.out.println(findClosestToTen(new int[]{}));                       // 0
 }
 
 private static int findClosestToTen(int[] array) {
@@ -541,7 +488,7 @@ public class FindSecondMax {
 }
 ```
 
-Решение: LC_FindSecondMaxInArray
+> Решение: [LC_FindSecondMaxInArray](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/array/LC_FindSecondMaxInArray.java)
 #### Задача 25
 
 ```java
@@ -551,6 +498,7 @@ public String getSummary (String string) {
 }
 ```
 
+> Решение: [LC_SummaryBySymbols](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/algorithm/LC_SummaryBySymbols.java)
 #### Задача 26
 
 ```java
@@ -560,18 +508,38 @@ public boolean isAllLetters (String string) {
 }
 ```
 
+> Решени: [LC_IsAllLetters](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/regex/LC_IsAllLetters.java)
 #### Задача 27
 
 ```java
-// объеденить слова в одну строку с делиметром
-public static String concatAll (String delimiter, String... strings) {
-	return "";
+/**
+* Найти первый неповторяющийся элемент в массиве
+*/
+public static void main(String[] args) {
+        int[] nums = {4, 5, 1, 2, 0, 4, 5, 2};
+}        
+```
+
+[FindFirstNotRepeatElementInArray](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/array/LC_FindFirstNotRepeatElementInArray.java)
+#### Задача 28
+
+```java
+/**
+* Проверить, является ли строка палиндромом?
+*/
+public static void main(String[] args) {  
+    String str = "A man a plan a canal Panama";  
+    System.out.println("Is palindrome: " + isPalindrome(str)); 
 }
 
-public static void main(String[] args) {
-	System.out.println(concatAll("-", "Goodbye", "Java", "!"));
+public static boolean isPalindrome(String str) {
+	// TODO
+	return true;
 }
 ```
 
-#### Задача 28
+[LC_IsStringPalindrome](https://github.com/GitLobanov/java-live-coding-one/blob/master/src/main/java/by/lobanov/training/ru/livecoding/core/string/LC_IsStringPalindrome.java)
+
+#### Задача 29
+
 

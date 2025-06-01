@@ -123,7 +123,6 @@ public class Overload {
 #### RC 5
   
 ```java  
-  
 public static void main(String[] args) {  
     try {  
         try {  
@@ -143,4 +142,29 @@ public static void main(String[] args) {
 }  
 ```
 
-#### RC 6
+#### Задача 6
+
+```java
+public class SomeClass {
+    static int i = 1;
+}
+
+public class ExceptionTest {
+    public static void main(String[] args) {
+        System.out.println(foo());
+    }
+
+    static int foo() {
+        try {
+            SomeClass someClass = null;
+            return someClass.i;
+        } catch (Exception e) {
+            return 2;
+        } catch (Throwable e) {
+            return 3;
+        } finally {
+            return 4;
+        }
+    }
+}
+```
