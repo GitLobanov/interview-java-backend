@@ -154,3 +154,69 @@ public class Test {
     }  
 }  
 ```  
+
+
+#### Задача 5
+
+какие способы знаешь улучшения кода? замена структуры хранения в боле конкрентную в многопоточной среде, также getFirst() изменяться будет очень редко, нужно понять что здесь можно сделать
+
+```java
+public class ThreadSafeList {
+  private List<Integer> numbers = new ArrayList<>();
+  public synchronized void add(Integer number) {
+     numbers.add(number);
+  }
+  public synchronized Integer getFirst() {
+    if (numbers.size() > 0) {
+        return numbers.get(0);
+    }
+    return null;
+  }
+}
+```
+
+- `private final List<Integer> numbers = new CopyOnWriteArrayList<>();`
+- Кэширование первого элемента (volatile или атомик)
+- double check locking (synchronized, lock, semaphore)
+- Использование Immutable Collections
+- lock Condition
+
+```java
+public class ThreadSafeList {
+    private final List<Integer> numbers = new ArrayList<>();
+    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+    private final Condition notEmpty = lock.writeLock().newCondition();
+
+    public void add(Integer number) {
+        lock.writeLock().lock();
+        try {
+            numbers.add(number);
+            notEmpty.signalAll(); // Уведомляем ожидающие потоки
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
+
+    public Integer getFirst() {
+        lock.readLock().lock();
+        try {
+            while (numbers.isEmpty()) {
+                lock.readLock().unlock();
+                lock.writeLock().lock();
+                try {
+                    notEmpty.await(); // Ждем, пока список не станет непустым
+                } finally {
+                    lock.readLock().lock();
+                    lock.writeLock().unlock();
+                }
+            }
+            return numbers.get(0);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+}
+```

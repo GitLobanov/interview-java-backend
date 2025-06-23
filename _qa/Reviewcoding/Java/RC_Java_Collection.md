@@ -59,3 +59,19 @@ List<Integer> list = List.of(1, 2, 3);
 ListIterator<Integer> listIterator = list.listIterator();
 System.out.println(listIterator.previous());
 ```
+
+
+#### Задача 4
+
+Что будет в результате вызова?
+
+```java
+public static void main(String[] args) {  
+    Map<String, String> map = new HashMap<>();  
+    map.put("a", "a");  
+  
+    for (String key : map.keySet()) {  
+        map.remove(key);  
+    }  
+}
+```

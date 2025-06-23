@@ -1,0 +1,169 @@
+// data race
+
+public static void main(String[] args) {
+    BankAccount account = new BankAccount(1000);
+
+    // Поток 1: 1000 раз добавляет 1 рубль
+    new Thread(() -> {
+        for (int i = 0; i < 1000; i++) {
+           account.deposit(1);
+        }
+    }).start();
+	
+	// Поток 2: 1000 раз снимает 1 рубль
+	new Thread(() -> {
+		for (int i = 0; i < 1000; i++) {
+			account.withdraw(1);
+		}
+	}).start();
+
+    // Итоговый баланс != 1000 (например, 978 или 1023)
+}
+
+
+// deadlock
+
+BankAccount acc1 = new BankAccount(1000);
+BankAccount acc2 = new BankAccount(2000);
+
+// Поток 1: acc1 -> acc2
+new Thread(() -> acc1.transfer(acc2, 500)).start();
+
+// Поток 2: acc2 -> acc1
+new Thread(() -> acc2.transfer(acc1, 300)).start();
+
+// livelock
+
+public class BankAccount {
+    // ... (код класса)
+
+    public void transfer(BankAccount to, long amount) {
+        while (true) {
+            if (this.tryLock()) {          // Пытаемся захватить текущий аккаунт
+                if (to.tryLock()) {       // Пытаемся захватить целевой
+                    this.withdraw(amount);
+                    to.deposit(amount);
+                    unlock();             // Освобождаем оба аккаунта
+                    to.unlock();
+                    break;
+                }
+                unlock();  // Если не удалось захватить целевой, отпускаем текущий
+            }
+        }
+    }
+
+    private boolean tryLock() { /* Имитация tryLock */ }
+    private void unlock() { /* Имитация unlock */ }
+}
+
+BankAccount acc1 = new BankAccount(1000);
+BankAccount acc2 = new BankAccount(2000);
+
+// Поток 1: acc1 -> acc2
+new Thread(() -> acc1.transfer(acc2, 500)).start();
+
+// Поток 2: acc2 -> acc1
+new Thread(() -> acc2.transfer(acc1, 300)).start();
+
+
+// starvation
+
+
+public class BankAccount {
+    // ... (код класса)
+
+    public synchronized void withdraw(long amount) {
+        // Долгая операция (имитация)
+        try { Thread.sleep(1000); } catch (InterruptedException e) {}
+        balance -= amount;
+    }
+}
+
+public static void main(String[] args) {
+    BankAccount account = new BankAccount(1000);
+
+    // Поток с высоким приоритетом постоянно вызывает withdraw()
+    Thread highPriorityThread = new Thread(() -> {
+        while (true) {
+            account.withdraw(1);
+        }
+    });
+    highPriorityThread.setPriority(Thread.MAX_PRIORITY);
+    highPriorityThread.start();
+
+    // Низкоприоритетный поток не может войти в synchronized-метод
+    Thread lowPriorityThread = new Thread(() -> {
+        account.withdraw(100); // Никогда не выполнится
+    });
+    lowPriorityThread.setPriority(Thread.MIN_PRIORITY);
+    lowPriorityThread.start();
+}
+
+
+----------------
+
+public class BankAccount {
+    private long balance;
+
+    public BankAccount(long balance) {
+        this.balance = balance;
+    }
+
+    // Долгий synchronized-метод
+    public synchronized void processLargeTransaction() {
+        try {
+            Thread.sleep(2000); // Имитация долгой обработки
+        } catch (InterruptedException e) {}
+        balance += 100;
+    }
+
+    // Короткий synchronized-метод (будет "голодать")
+    public synchronized void processQuickTransaction() {
+        balance -= 1;
+    }
+}
+
+
+public static void main(String[] args) {
+    BankAccount account = new BankAccount(1000);
+
+    // Поток 1: постоянно вызывает ДОЛГИЕ операции
+    new Thread(() -> {
+        while (true) {
+            account.processLargeTransaction();
+            System.out.println("Долгая операция завершена. Баланс: " + account.getBalance());
+        }
+    }).start();
+
+    // Поток 2: пытается выполнять КОРОТКИЕ операции (но будет блокироваться)
+    new Thread(() -> {
+        while (true) {
+            account.processQuickTransaction();
+            System.out.println("Быстрая операция выполнена. Баланс: " + account.getBalance());
+        }
+    }).start();
+}
+
+
+private Lock lock = new ReentrantLock(true); // true = fair-режим
+
+public void processQuickTransaction() {
+    lock.lock();
+    try {
+        balance -= 1;
+    } finally {
+        lock.unlock();
+    }
+}
+
+public void processLargeTransaction() {
+    long tempValue;
+    synchronized (this) {
+        tempValue = balance + 100;
+    }
+    // Долгие вычисления БЕЗ блокировки
+    try { Thread.sleep(2000); } catch (InterruptedException e) {}
+    synchronized (this) {
+        balance = tempValue;
+    }
+}

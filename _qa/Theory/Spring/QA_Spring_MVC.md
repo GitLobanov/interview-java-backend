@@ -125,3 +125,17 @@ DispatcherServlet содержит список специальных "отоб
 17. В чем отличие Repository, Service, Component
 
 **`@Repository`** добавляет автоматическую обработку исключений, связанных с базой данных, **`@Service`** — это чисто для обозначения бизнес-логики, а **`@Component`** — базовая аннотация для общего назначения.
+
+#### Что представляет из себя Spring MVC
+
+- Model View Controller
+
+![[../../../_res/Pasted image 20240926141242.png]]
+
+###### @Controller vs @RestController
+
+- Если мы хотим серилизовать какой-то объект в примеру json, то мы также должны использовать @ResponseBody в методе
+- @RestController - уже имеет @ResponseBody
+
+
+#### Как Spring и Spring Boot поддерживают реактивное программирование? Что такое WebFlux?
