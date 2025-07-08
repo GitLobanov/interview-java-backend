@@ -4,4 +4,10 @@
 - **Timer**: Измеряет продолжительность операций (например, время выполнения запроса).
 - **Gauge**: Измеряет текущее значение (например, количество активных потоков).
 
-2. 
+
+
+
+### Resources
+
+- [PromQL tutorial for beginners and humans](https://valyala.medium.com/promql-tutorial-for-beginners-9ab455142085)
+- 

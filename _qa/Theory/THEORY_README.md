@@ -36,3 +36,7 @@
 - [Rest]
 - [Сборщик проектов]
 - [gRPC]
+
+### Other
+
+- [Other](Infrastructure/QA_Other.md)

@@ -683,7 +683,7 @@ At this level, we have a mindset of "divide and conquer", meaning that we split 
 - [[../004 Interview Info/posts/_qa/Theory/Infrastructure/QA. Kafka]]
 ## Основы
 
-- [[../004 Interview Info/posts/_inforage/Kafka/Base/Kafka]]
+- [Kafka](_inforage/Kafka/Base/Kafka.md)
 
 # Microservices
 

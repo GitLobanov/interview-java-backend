@@ -510,6 +510,7 @@ List<String> names = Arrays.asList("Jaime", "", "Tyron");
                 .collect(Collectors.toCollection(LinkedList::new));
 ```
 
+![](../../../../_res/collectors.svg)
 ###### Для группировки элементов в Map какой Collector будешь использовать?
 
 ###### Что такое IntStream и DoubleStream?
