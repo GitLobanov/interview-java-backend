@@ -459,3 +459,8 @@ Testcontainers (PostgreSQL, MySQL в Docker)
 
 ###### Можете пример привести, что вы там в тестах пишите? теорию я знаю, можете конкретный пример привести?
 
+### Resources
+
+- [BDD тестирование. Язык Gherkin. Фреймворк Cucumber](https://smartiqa.ru/blog/bdd_gherkin_cucumber)
+- [TDD, BDD, DDD, FDD, MDD и PDD, или все, что вы хотите узнать о Driven Development](https://worksolutions.ru/blog/driven-development/)
+- 

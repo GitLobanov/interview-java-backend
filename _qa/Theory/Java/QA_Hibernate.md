@@ -710,4 +710,5 @@ CREATE TABLE User (
 
 - [Аннотации Java для работы с базой данных](https://javastudy.ru/spring-data-jpa/annotation-persistence/)
 - [Entity auditing with Hibernate Envers](https://golb.hplar.ch/2019/08/envers.html)
+- [Вячеслав Круглов — Введение в Hibernate: что, зачем, и где стандартные ловушки](https://www.youtube.com/watch?v=C-wEZjEOhWc)
 - 

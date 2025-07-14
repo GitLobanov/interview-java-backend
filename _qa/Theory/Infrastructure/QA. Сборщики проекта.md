@@ -352,4 +352,5 @@ gradle tasks
 ### Resources
 
 - [Что такое сборщик продукта](https://www.software-testing.ru/library/testing/testing-for-beginners/3750-product-assembler)
+- [Наследование проектов в maven](https://java-online.ru/maven-inheritance.xhtml)
 - 
